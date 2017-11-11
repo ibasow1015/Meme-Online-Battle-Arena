@@ -13,18 +13,10 @@ def init(data):
 	icons.initIcons(data)
 
 	data.unit = data.width / 100
-    data.scrollX = data.scrollY = 0
-    data.players = pygame.sprite.Group()
-    characters.initCharacter(data)
-    data.minions = Minions.Minions()
-
-
-def init(data):
-    pass
-
-
-def mouseDown(event, data):
-    pass
+	data.scrollX = data.scrollY = 0
+	data.players = pygame.sprite.Group()
+	Characters.initCharacter(data)
+	data.minions = Minions.Minions()
 
 def mouseDown(event,data):
 	if(event.button==3):
@@ -59,10 +51,10 @@ def timerFired(data):
 
 def redrawAll(display, data):
     Characters.drawCharacter(display,data)
-    UI.drawTaskbar(display,data)
     icons.drawIcons(display,data)
     drawMap.drawMap(data, display)
-    characters.drawCharacter(display,data)
+    Characters.drawCharacter(display,data)
+    UI.drawTaskbar(display,data)
 
 
 def run(width=300, height=300):
