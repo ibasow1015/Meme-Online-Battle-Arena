@@ -39,7 +39,7 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		self.move()
 
-class Warrior(Player):
+class Test(Player):
 	def __init__(self,x,y,name):
 		Player.__init__(self,x,y,name)
 
@@ -59,7 +59,7 @@ class Warrior(Player):
 		self.resist=0
 
 def initCharacter(data):
-	data.player=Warrior(50,50,'Player1')
+	data.player=Test(50,50,'Test')
 	data.players.add(data.player)
 
 def drawCharacter(display,data):
