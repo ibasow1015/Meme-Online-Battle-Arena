@@ -1,4 +1,5 @@
 import pygame
+#hello
 
 class Main(object):
 	def init(self):
