@@ -1,86 +1,97 @@
-import pygame
+import pygame, sys
+from pygame.locals import *
 
-class Main(object):
-	def init(self):
-		pass
 
-	def mousePressed(self, x, y):
-		print(x, y)
+def init(data):
+    data.unit = data.width / 100
+    pass
 
-	def mouseReleased(self, x, y):
-		pass
 
-	def mouseMotion(self, x, y):
-		pass
+def mouseDown(event, data):
+    pass
 
-	def mouseDrag(self, x, y):
-		pass
 
-	def keyPressed(self, keyCode, modifier):
-		pass
+def mouseUp(event, data):
+    pass
 
-	def keyReleased(self, keyCode, modifier):
-		pass
 
-	def timerFired(self, dt):
-		pass
+def keyDown(event, data):
+    print(event.key)
 
-	def redrawAll(self, screen):
-		pass
 
-	def isKeyPressed(self, key):
-		return self._keys.get(key, False)
+def keyUp(event, data):
+    pass
 
-	def __init__(self, width=600, height=600, fps=50, title='Settlers of '
-	                                                        'Catan'):
-		self.width = width
-		self.height = height
-		self.fps = fps
-		self.title = title
-		self.bgColor = (255, 255, 255)
-		pygame.init()
 
-	def run(self):
-		clock = pygame.time.Clock()
-		screen = pygame.display.set_mode((self.width, self.height))
+def timerFired(data):
+    pass
 
-		pygame.display.set_caption(self.title)
 
-		self._keys = dict()
+def redrawAll(display, data):
+    pass
 
-		self.init()
-		playing = True
-		while playing:
-			time = clock.tick(self.fps)
-			self.timerFired(time)
-			for event in pygame.event.get():
-				if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-					self.mousePressed(*(event.pos))
-				elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-					self.mouseReleased(*(event.pos))
-				elif event.type == pygame.MOUSEMOTION and event.buttons == (
-						0,0,0):
-					self.mouseMotion(*(event.pos))
-				elif event.type == pygame.MOUSEMOTION and event.buttons[0] == 1:
-					self.mouseDrag(*(event.pos))
-				elif event.type == pygame.KEYDOWN:
-					self._keys[event.key] = True
-					self.keyPressed(event.key, event.mod)
-				elif event.type == pygame.KEYUP:
-					self._keys[event.key] = False
-					self.keyReleased(event.key, event.mod)
-				elif event.type == pygame.QUIT:
-					playing = False
 
-			screen.fill(self.bgColor)
-			self.redrawAll(screen)
-			pygame.display.flip()
+def run(width=300, height=300):
+    def redrawAllWrapper(display, data):
+        display.fill((255, 255, 255))
+        redrawAll(display, data)
+        pygame.display.update()
 
-		pygame.quit()
+        def mouseDownWrapper(event, display, data):
+            mouseDown(event, data)
+            redrawAllWrapper(display, data)
 
-def main():
-	game = Main()
-	game.run()
+        def mouseUpWrapper(event, display, data):
+            mouseUp(event, data)
+            redrawAllWrapper(display, data)
 
-if __name__ == '__main__':
-	main()
+        def keyDownWrapper(event, display, data):
+            keyDown(event, data)
+            redrawAllWrapper(display, data)
+
+        def keyUpWrapper(event, display, data):
+            keyUp(event, data)
+            redrawAllWrapper(display, data)
+
+        def quit():
+            pygame.quit()
+            sys.exit()
+
+        def timerFiredWrapper(display, data):
+            timerFired(data)
+            redrawAllWrapper(display, data)
+            data.fpsClock.tick(data.fps)
+
+        # Set up data and call init
+        class Struct(object):
+            pass
+
+        data = Struct()
+        data.width = width
+        data.height = height
+        data.fps = 30  # frames per second
+        data.fpsClock = pygame.time.Clock()
+        init(data)
+
+        # initialize module and display
+        pygame.init()
+        display = pygame.display.set_mode((data.width, data.height))
+        pygame.display.set_caption('RTS')
+
+        # main loop
+        while (True):
+            for event in pygame.event.get():
+                if (event.type == QUIT):
+                    quit()
+                if (event.type == KEYDOWN):
+                    keyDownWrapper(event, display, data)
+                if (event.type == KEYUP):
+                    keyUpWrapper(event, display, data)
+                if (event.type == MOUSEBUTTONDOWN):
+                    mouseDownWrapper(event, display, data)
+                if (event.type == MOUSEBUTTONUP):
+                    mouseUpWrapper(event, display, data)
+            timerFiredWrapper(display, data)
+
+
+run(600, 600)
