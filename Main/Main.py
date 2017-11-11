@@ -41,6 +41,10 @@ def keyDown(event, data):
     elif (event.key == 275):
         drawMap.move(data, 1, 0)
 
+    if(event.unicode=='1'):
+    	data.player.ability1()
+    if(event.unicode=='2'):
+    	data.player.ability2()
 
 def keyUp(event, data):
     pass
