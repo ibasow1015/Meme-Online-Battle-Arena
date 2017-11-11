@@ -1,23 +1,28 @@
 import pygame, sys
 from pygame.locals import *
-import characters
+import Characters
 import Minions
 import drawMap
+
 
 def init(data):
     data.unit = data.width / 100
     data.players = pygame.sprite.Group()
-    characters.initCharacter(data)
+    Characters.initCharacter(data)
     data.minions = Minions.Minions()
+    data.minion = Minions.Minion((100, 30), data)
+    data.minions.add(data.minion)
+    data.timer = 0
     pass
 
 
 def mouseDown(event, data):
     pass
 
-def mouseDown(event,data):
-	if(event.button==3):
-		data.player.dest=event.pos
+
+def mouseDown(event, data):
+    if (event.button == 3):
+        data.player.dest = event.pos
 
 
 def mouseUp(event, data):
@@ -27,22 +32,26 @@ def mouseUp(event, data):
 def keyDown(event, data):
     print(event.key)
 
-	if(event.key == 273):
-		drawMap.move(data, 0, -1)
-	elif(event.key == 274):
-		drawMap.
+    if (event.key == 273):
+        drawMap.move(data, 0, -1)
+    elif (event.key == 274):
+        drawMap.move(data, 0, 1)
+
 
 def keyUp(event, data):
     pass
 
 
 def timerFired(data):
+    data.timer += 250
+    data.minions.update(data.timer, data)
     pass
 
 
 def redrawAll(display, data):
     drawMap.drawMap(data, display)
-    characters.drawCharacter(display,data)
+    Characters.drawCharacter(display, data)
+    data.minions.drawMinions(display)
 
 
 def run(width=300, height=300):
@@ -52,33 +61,34 @@ def run(width=300, height=300):
         pygame.display.update()
 
     def mouseDownWrapper(event, display, data):
-            mouseDown(event, data)
-            redrawAllWrapper(display, data)
+        mouseDown(event, data)
+        redrawAllWrapper(display, data)
 
     def mouseUpWrapper(event, display, data):
-            mouseUp(event, data)
-            redrawAllWrapper(display, data)
+        mouseUp(event, data)
+        redrawAllWrapper(display, data)
 
     def keyDownWrapper(event, display, data):
-            keyDown(event, data)
-            redrawAllWrapper(display, data)
+        keyDown(event, data)
+        redrawAllWrapper(display, data)
 
     def keyUpWrapper(event, display, data):
-            keyUp(event, data)
-            redrawAllWrapper(display, data)
+        keyUp(event, data)
+        redrawAllWrapper(display, data)
 
     def quit():
-            pygame.quit()
-            sys.exit()
+        pygame.quit()
+        sys.exit()
 
     def timerFiredWrapper(display, data):
-            timerFired(data)
-            redrawAllWrapper(display, data)
-            data.fpsClock.tick(data.fps)
+        timerFired(data)
+        redrawAllWrapper(display, data)
+        data.fpsClock.tick(data.fps)
 
     # Set up data and call init
     class Struct(object):
         pass
+
     data = Struct()
     data.width = width
     data.height = height
