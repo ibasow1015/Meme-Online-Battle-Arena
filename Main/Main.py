@@ -1,18 +1,17 @@
 import pygame, sys
 from pygame.locals import *
-import characters
-
-
+import Characters
+import Minions
 def init(data):
     data.unit = data.width / 100
+    data.players = pygame.sprite.Group()
+    Characters.initCharacter(data)
+    data.minions = Minions.Minions()
     pass
 
 
 def mouseDown(event, data):
     pass
-    data.players=pygame.sprite.Group()
-
-    characters.initCharacter(data)
 
 def mouseDown(event,data):
 	if(event.button==3):
@@ -36,7 +35,7 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
-    characters.drawCharacter(display,data)
+    Characters.drawCharacter(display,data)
 
 
 def run(width=300, height=300):
@@ -45,61 +44,60 @@ def run(width=300, height=300):
         redrawAll(display, data)
         pygame.display.update()
 
-        def mouseDownWrapper(event, display, data):
+    def mouseDownWrapper(event, display, data):
             mouseDown(event, data)
             redrawAllWrapper(display, data)
 
-        def mouseUpWrapper(event, display, data):
+    def mouseUpWrapper(event, display, data):
             mouseUp(event, data)
             redrawAllWrapper(display, data)
 
-        def keyDownWrapper(event, display, data):
+    def keyDownWrapper(event, display, data):
             keyDown(event, data)
             redrawAllWrapper(display, data)
 
-        def keyUpWrapper(event, display, data):
+    def keyUpWrapper(event, display, data):
             keyUp(event, data)
             redrawAllWrapper(display, data)
 
-        def quit():
+    def quit():
             pygame.quit()
             sys.exit()
 
-        def timerFiredWrapper(display, data):
+    def timerFiredWrapper(display, data):
             timerFired(data)
             redrawAllWrapper(display, data)
             data.fpsClock.tick(data.fps)
 
-        # Set up data and call init
-        class Struct(object):
-            pass
+    # Set up data and call init
+    class Struct(object):
+        pass
+    data = Struct()
+    data.width = width
+    data.height = height
+    data.fps = 30  # frames per second
+    data.fpsClock = pygame.time.Clock()
+    init(data)
 
-        data = Struct()
-        data.width = width
-        data.height = height
-        data.fps = 30  # frames per second
-        data.fpsClock = pygame.time.Clock()
-        init(data)
+    # initialize module and display
+    pygame.init()
+    display = pygame.display.set_mode((data.width, data.height))
+    pygame.display.set_caption('RTS')
 
-        # initialize module and display
-        pygame.init()
-        display = pygame.display.set_mode((data.width, data.height))
-        pygame.display.set_caption('RTS')
-
-        # main loop
-        while (True):
-            for event in pygame.event.get():
-                if (event.type == QUIT):
-                    quit()
-                if (event.type == KEYDOWN):
-                    keyDownWrapper(event, display, data)
-                if (event.type == KEYUP):
-                    keyUpWrapper(event, display, data)
-                if (event.type == MOUSEBUTTONDOWN):
-                    mouseDownWrapper(event, display, data)
-                if (event.type == MOUSEBUTTONUP):
-                    mouseUpWrapper(event, display, data)
-            timerFiredWrapper(display, data)
+    # main loop
+    while (True):
+        for event in pygame.event.get():
+            if (event.type == QUIT):
+                quit()
+            if (event.type == KEYDOWN):
+                keyDownWrapper(event, display, data)
+            if (event.type == KEYUP):
+                keyUpWrapper(event, display, data)
+            if (event.type == MOUSEBUTTONDOWN):
+                mouseDownWrapper(event, display, data)
+            if (event.type == MOUSEBUTTONUP):
+                mouseUpWrapper(event, display, data)
+        timerFiredWrapper(display, data)
 
 
 run(600, 600)
