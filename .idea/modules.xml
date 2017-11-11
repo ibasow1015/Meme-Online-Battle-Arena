@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Catan/.idea/Catan.iml" filepath="$PROJECT_DIR$/../Catan/.idea/Catan.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Meme-Online-Battle-Arena.iml" filepath="$PROJECT_DIR$/.idea/Meme-Online-Battle-Arena.iml" />
     </modules>
   </component>
