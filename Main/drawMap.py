@@ -2,10 +2,9 @@ import pygame
 
 
 def drawMap(data, display):
-	data.scrollX = data.scrollY = 0
 	width = 7000
 	height = 7000
-	data.mapStep = 20
+	data.mapStep = 500
 
 	margin = 20
 	baseRad = height * 1//5
@@ -15,7 +14,7 @@ def drawMap(data, display):
 	tower2Color = (255, 0, 0)
 
 	pygame.draw.rect(display, (0,255,0), (data.scrollX, data.scrollY, \
-	                              width-data.scrollX, height-data.scrollY))
+	                              width, height))
 
 	pygame.draw.ellipse(display, (0,0,0), (0-baseRad,
 	                    height-baseRad//2, baseRad*2, baseRad))
@@ -58,3 +57,5 @@ def drawMap(data, display):
 def move(data, x, y):
 	data.scrollX += x*data.mapStep
 	data.scrollY += y*data.mapStep
+
+	print(data.scrollX, data.scrollY)

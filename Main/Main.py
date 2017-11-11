@@ -6,6 +6,7 @@ import drawMap
 
 def init(data):
     data.unit = data.width / 100
+    data.scrollX = data.scrollY = 0
     data.players = pygame.sprite.Group()
     characters.initCharacter(data)
     data.minions = Minions.Minions()
@@ -25,12 +26,18 @@ def mouseUp(event, data):
 
 
 def keyDown(event, data):
-    print(event.key)
+    #print(event.key)
 
-	if(event.key == 273):
-		drawMap.move(data, 0, -1)
-	elif(event.key == 274):
-		drawMap.
+    #print(data.scrollX)
+
+    if(event.key == 273):
+        drawMap.move(data, 0, -1)
+    elif(event.key == 274):
+        drawMap.move(data, 0, 1)
+    elif(event.key == 276):
+        drawMap.move(data, -1, 0)
+    elif(event.key == 275):
+        drawMap.move(data, 1, 0)
 
 def keyUp(event, data):
     pass
