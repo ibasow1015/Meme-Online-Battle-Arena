@@ -4,23 +4,24 @@ import math
 class Player(pygame.sprite.Sprite):
 	def __init__(self,x,y,name):
 		pygame.sprite.Sprite.__init__(self)
-
-		self.image=pygame.Surface((50,50))
-		self.rect=self.image.get_rect()
-		self.rect.center=(x,y)
-		self.speed=10
 		self.dest=(x,y)
+		self.gold=200
 
 	def move(self,epsilon=6):
+		#location command
 		destX,destY=self.dest[0],self.dest[1]
+		#current location
 		x,y=self.rect.center[0],self.rect.center[1]
+		#distance to travel
 		dx=destX-x
 		dy=destY-y
+		#placeholder for direction
 		xDir,yDir=1,1
 		if(dx<0):
 			xDir=-1
 		if(dy<0):
 			yDir=-1
+		#do nothing if character is within range to prevent spazzing
 		if(dy<epsilon and dy>-epsilon and dx<epsilon and dx>-epsilon):
 			self.rect.center=(x,y)
 		elif(dy<epsilon and dy>-epsilon):
@@ -28,7 +29,9 @@ class Player(pygame.sprite.Sprite):
 		elif(dx<epsilon and dx>-epsilon):
 			self.rect.center=(x,y+self.speed*yDir)
 		else:
+			#get vector angle
 			theta=abs(math.atan(dy/dx))
+			#calculate unit vector
 			i=self.speed*math.cos(theta)*xDir
 			j=self.speed*math.sin(theta)*yDir
 			self.rect.center=(x+i,y+j)
@@ -36,8 +39,27 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		self.move()
 
+class Warrior(Player):
+	def __init__(self,x,y,name):
+		Player.__init__(self,x,y,name)
+
+		self.image=pygame.Surface((50,50))
+		self.rect=self.image.get_rect()
+		self.rect.center=(x,y)
+
+		self.health=600
+		self.maxHealth=600
+		self.energy=600
+		self.maxEnergy=600
+		self.speed=10
+		self.armor=0
+		self.regen=0
+		self.damage=0
+		self.magic=0
+		self.resist=0
+
 def initCharacter(data):
-	data.player=Player(50,50,'Player1')
+	data.player=Warrior(50,50,'Player1')
 	data.players.add(data.player)
 
 def drawCharacter(display,data):

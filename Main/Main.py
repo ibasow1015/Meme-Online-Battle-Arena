@@ -1,11 +1,14 @@
 import pygame,sys
 from pygame.locals import *
-import characters
+import Characters
+import UI
+import icons
 
 def init(data):
-    data.players=pygame.sprite.Group()
+	data.players=pygame.sprite.Group()
 
-    characters.initCharacter(data)
+	Characters.initCharacter(data)
+	icons.initIcons(data)
 
 def mouseDown(event,data):
 	if(event.button==3):
@@ -24,7 +27,9 @@ def timerFired(data):
     pass
 
 def redrawAll(display, data):
-    characters.drawCharacter(display,data)
+    Characters.drawCharacter(display,data)
+    UI.drawTaskbar(display,data)
+    icons.drawIcons(display,data)
 
 def run(width=300, height=300):
 	def redrawAllWrapper(display, data):
@@ -68,6 +73,7 @@ def run(width=300, height=300):
 
 	# initialize module and display
 	pygame.init()
+	data.font=pygame.font.SysFont('helvetica',15)
 	display = pygame.display.set_mode((data.width,data.height))
 	pygame.display.set_caption('RTS')
 
