@@ -36,10 +36,6 @@ def keyDown(event, data):
         drawMap.move(data, 0, -1)
     elif (event.key == 274):
         drawMap.move(data, 0, 1)
-    if (event.key == 273):
-        drawMap.move(data, 0, -1)
-    elif (event.key == 274):
-        drawMap.move(data, 0, 1)
     elif (event.key == 276):
         drawMap.move(data, -1, 0)
     elif (event.key == 275):
@@ -59,9 +55,10 @@ def timerFired(data):
 def redrawAll(display, data):
     drawMap.drawMap(data, display)
     Characters.drawCharacter(display, data)
-    icons.drawIcons(display, data)
     data.minions.drawMinions(display)
     UI.drawTaskbar(display,data)
+    icons.drawIcons(display, data)
+
 
 
 def run(width=300, height=300):
