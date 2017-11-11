@@ -1,11 +1,6 @@
-'''
-pygamegame.py
-created by Lukas Peraza for 15-112 Pygame Optional Lecture, 11/11/15
-'''
-
 import pygame
 
-class PygameGame(object):
+class Main(object):
 	def init(self):
 		pass
 
@@ -84,7 +79,7 @@ class PygameGame(object):
 		pygame.quit()
 
 def main():
-	game = PygameGame()
+	game = Main()
 	game.run()
 
 if __name__ == '__main__':
