@@ -1,11 +1,13 @@
 import pygame, sys
 from pygame.locals import *
-import Characters
+import characters
 import Minions
+import drawMap
+
 def init(data):
     data.unit = data.width / 100
     data.players = pygame.sprite.Group()
-    Characters.initCharacter(data)
+    characters.initCharacter(data)
     data.minions = Minions.Minions()
     pass
 
@@ -25,6 +27,10 @@ def mouseUp(event, data):
 def keyDown(event, data):
     print(event.key)
 
+	if(event.key == 273):
+		drawMap.move(data, 0, -1)
+	elif(event.key == 274):
+		drawMap.
 
 def keyUp(event, data):
     pass
@@ -35,7 +41,8 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
-    Characters.drawCharacter(display,data)
+    drawMap.drawMap(data, display)
+    characters.drawCharacter(display,data)
 
 
 def run(width=300, height=300):
