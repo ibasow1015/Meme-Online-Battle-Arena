@@ -5,8 +5,8 @@ class Minions(sprite.Group):
         super(Minions, self).__init__(self)
         self.spawnTimer = 0
 
-    def update(self, timer):
-        sprite.Group.update(self, timer)
+    def update(self, timer, data):
+        sprite.Group.update(self, timer, data)
         self.spawnTimer += timer
 
     def drawMinions(self, gameMap):
@@ -14,12 +14,11 @@ class Minions(sprite.Group):
 
 class Minion(sprite.Sprite):
     minions = Minions()
-    def __init__(self, startingPosition, *groups, data):
-        super(Minion, self).__init__(*groups)
+    def __init__(self, startingPosition, data):
+        super(Minion, self).__init__()
         self.image = Surface((data.unit * 5, data.unit * 5))
-        self.rect = self.image.getRect()
-        self.rect.x = startingPosition[0]
-        self.rect.y = startingPosition[1]
+        self.rect = self.image.get_rect()
+        self.rect.center = startingPosition
         self.damageReduction = 0.1
         self.target = None
         self.speed = data.unit * 2
@@ -35,7 +34,9 @@ class Minion(sprite.Sprite):
         pass
 
     def update(self, timer, data):
-        pass
+        if not timer % 1000:
+            self.rect.x += data.unit
+            self.rect.y += data.unit
 
     def getValue(self, cs):
         pass
