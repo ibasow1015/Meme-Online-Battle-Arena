@@ -45,9 +45,10 @@ class Warrior(Player):
     def __init__(self, x, y, name):
         Player.__init__(self, x, y, name)
 
+
 class Test(Player):
-    def __init__(self,x,y,name):
-        Player.__init__(self,x,y,name)
+    def __init__(self, x, y, name):
+        Player.__init__(self, x, y, name)
         self.image = pygame.Surface((50, 50))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -63,14 +64,13 @@ class Test(Player):
         self.magic = 0
         self.resist = 0
 
-
-	def ability1(self):
-		self.health-=50
-		if(self.health<0):
-			self.health=0
-		self.energy+=50
-		if(self.energy>self.maxEnergy):
-			self.energy=self.maxEnergy
+        def ability1(self):
+            self.health -= 50
+            if (self.health < 0):
+                self.health = 0
+            self.energy += 50
+            if (self.energy > self.maxEnergy):
+                self.energy = self.maxEnergy
 
 
 def initCharacter(data):
