@@ -74,3 +74,4 @@ def drawMap(data, display):
 def move(data, x, y):
     data.scrollX += x * data.mapStep
     data.scrollY += y * data.mapStep
+
