@@ -1,4 +1,4 @@
-from pygame import sprite
+from pygame import *
 
 class Minions(sprite.Group):
     def __init__(self):
@@ -14,12 +14,15 @@ class Minions(sprite.Group):
 
 class Minion(sprite.Sprite):
     minions = Minions()
-    def __init__(self, startingPosition, *groups):
+    def __init__(self, startingPosition, *groups, data):
         super(Minion, self).__init__(*groups)
+        self.image = Surface((data.unit * 5, data.unit * 5))
+        self.rect = self.image.getRect()
         self.rect.x = startingPosition[0]
         self.rect.y = startingPosition[1]
         self.damageReduction = 0.1
         self.target = None
+        self.speed = data.unit * 2
         Minion.minions.add(self)
 
     def getHealth(self):
@@ -32,8 +35,7 @@ class Minion(sprite.Sprite):
         pass
 
     def update(self, timer, data):
-        if not(timer % 1000):
-            self.x += data.unit
+        pass
 
     def getValue(self, cs):
         pass
@@ -47,7 +49,7 @@ class Melee(Minion):
         self.structureDamage = 60
         self.lastHit = 20
         self.assist = 10
-        self.range = data.unit * 3
+        self.range = data.unit * 5
 
     def getHealth(self):
         return self.health
