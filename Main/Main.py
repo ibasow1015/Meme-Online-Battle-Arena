@@ -36,15 +36,15 @@ def keyDown(event, data):
         drawMap.move(data, 0, -1)
     elif (event.key == 274):
         drawMap.move(data, 0, 1)
-    if (event.key == 273):
-        drawMap.move(data, 0, -1)
-    elif (event.key == 274):
-        drawMap.move(data, 0, 1)
     elif (event.key == 276):
         drawMap.move(data, -1, 0)
     elif (event.key == 275):
         drawMap.move(data, 1, 0)
 
+    if(event.unicode=='1'):
+    	data.player.ability1()
+    if(event.unicode=='2'):
+    	data.player.ability2()
 
 def keyUp(event, data):
     pass
@@ -57,11 +57,12 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
-    Characters.drawCharacter(display, data)
-    icons.drawIcons(display, data)
     drawMap.drawMap(data, display)
+    Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
     UI.drawTaskbar(display,data)
+    icons.drawIcons(display, data)
+
 
 
 def run(width=300, height=300):
@@ -108,6 +109,7 @@ def run(width=300, height=300):
 
     # initialize module and display
     pygame.init()
+    data.font = pygame.font.SysFont("helvetica", 15)
     display = pygame.display.set_mode((data.width, data.height))
     pygame.display.set_caption('RTS')
 
