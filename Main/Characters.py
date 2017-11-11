@@ -58,6 +58,15 @@ class Test(Player):
 		self.magic=0
 		self.resist=0
 
+	def ability1(self):
+		self.health-=50
+		if(self.health<0):
+			self.health=0
+		self.energy+=50
+		if(self.energy>self.maxEnergy):
+			self.energy=self.maxEnergy
+
+
 def initCharacter(data):
 	data.player=Test(50,50,'Test')
 	data.players.add(data.player)

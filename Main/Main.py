@@ -50,7 +50,6 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
-    Characters.drawCharacter(display,data)
     drawMap.drawMap(data, display)
     Characters.drawCharacter(display,data)
     UI.drawTaskbar(display,data)
