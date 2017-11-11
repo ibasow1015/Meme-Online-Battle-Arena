@@ -60,8 +60,8 @@ def redrawAll(display, data):
     Characters.drawCharacter(display, data)
     icons.drawIcons(display, data)
     drawMap.drawMap(data, display)
-    Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
+    UI.drawTaskbar(display,data)
 
 
 def run(width=300, height=300):

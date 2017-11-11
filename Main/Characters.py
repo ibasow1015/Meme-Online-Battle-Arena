@@ -45,6 +45,9 @@ class Warrior(Player):
     def __init__(self, x, y, name):
         Player.__init__(self, x, y, name)
 
+class Test(Player):
+    def __init__(self,x,y,name):
+        Player.__init__(self,x,y,name)
         self.image = pygame.Surface((50, 50))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -62,8 +65,6 @@ class Warrior(Player):
 
 
 def initCharacter(data):
-    data.player = Player(50, 50, 'Player1')
-    data.players.add(data.player)
     data.player = Warrior(50, 50, 'Player1')
     data.players.add(data.player)
 
