@@ -1,11 +1,15 @@
 import pygame,sys
 from pygame.locals import *
+import characters
 
 def init(data):
-    pass
+    data.players=pygame.sprite.Group()
+
+    characters.initCharacter(data)
 
 def mouseDown(event,data):
-    pass
+	if(event.button==3):
+		data.player.dest=event.pos
 
 def mouseUp(event,data):
     pass
@@ -20,7 +24,7 @@ def timerFired(data):
     pass
 
 def redrawAll(display, data):
-    pass
+    characters.drawCharacter(display,data)
 
 def run(width=300, height=300):
 	def redrawAllWrapper(display, data):
