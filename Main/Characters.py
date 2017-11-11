@@ -39,7 +39,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.move()
-        
+
 class Test(Player):
     def __init__(self, x, y, name):
         Player.__init__(self, x, y, name)
@@ -66,23 +66,6 @@ class Test(Player):
         if (self.energy > self.maxEnergy):
             self.energy = self.maxEnergy
 
-<<<<<<< HEAD
-	def ability1(self):
-		self.health-=50
-		if(self.health<0):
-			self.health=0
-		self.energy+=50
-		if(self.energy>self.maxEnergy):
-			self.energy=self.maxEnergy
-
-	def ability2(self):
-		self.health+=50
-		if(self.health>self.maxHealth):
-			self.health=self.maxHealth
-		self.energy-=50
-		if(self.energy<0):
-			self.energy=0
-=======
     def ability2(self):
         self.health += 50
         if (self.health > self.maxHealth):
@@ -90,7 +73,6 @@ class Test(Player):
         self.energy -= 50
         if (self.energy < 0):
             self.energy = 0
->>>>>>> 4a16b0d2ad566534c5d1bc07022be031e311724b
 
 def initCharacter(data):
     data.player = Test(50, 50, 'Player1')
