@@ -15,7 +15,7 @@ class ChainChomp(pygame.sprite.Sprite):
         self.health=3000
         self.range=1000
         self.damage=200
-        self.speed=1
+        self.speed=30
         self.team=team
         self.dest=pos
         self.post=pos
@@ -27,11 +27,13 @@ class ChainChomp(pygame.sprite.Sprite):
         self.move(data)
 
     def canAttack(self,player):
-        dist=((player.rect.center[0]-self.rect.center[0])**2+(player.rect.center[1]+self.rect.center[1])**2)**.5
+        dist=((player.rect.center[0]-self.post[0])**2+(player.rect.center[1]+self.post[1])**2)**.5
         if(dist<=self.range):
-            self.destX,self.destY=player.rect.center[0],player.rect.center[1]
+            self.dest=player.rect.center
+            return True
         else:
-            self.destX,self.destY=self.post[0],self.post[1]
+            self.dest=self.post
+            return False
 
     def attack(self,data,player):
     	if(pygame.sprite.collide_rect(self,player)):
@@ -81,7 +83,6 @@ class ChainChomp(pygame.sprite.Sprite):
                 self.animationDirection = 'up'
 
         self.rect.center = (x - data.scrollX, y - data.scrollY)
-        print(x,y)
         self.pos = [x, y]
 
 def initTowers(data):

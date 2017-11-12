@@ -66,8 +66,7 @@ class Minion(sprite.Sprite):
                         self.image = transform.scale(self.image,
                                                      (self.width, self.height))
                         self.rect.x += 6
-
-        print(self.rect.center)
+                        
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
         self.rect.y += y * data.mapStep
