@@ -3,6 +3,7 @@ from pygame.locals import *
 import Characters
 import Mario
 import Bowser
+import Yoshi
 import UI
 import icons
 import Minions
@@ -13,7 +14,7 @@ import socket
 import threading
 from queue import Queue
 
-HOST = "128.237.132.204" # put your IP address here if playing on multiple computers
+HOST = "128.237.223.105" # put your IP address here if playing on multiple computers
 PORT = 50003
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 server.connect((HOST,PORT))
@@ -73,11 +74,11 @@ def mouseDown(event, data):
     msg=''
     if(event.button==3):
         data.player.autoAttack(data,event.pos)
-        msg+='move %d %d\n'%(event.pos[0],event.pos[1])
+        
     if (event.button == 3 and data.fireOn == 'off'):
         data.player.dest = [event.pos[0] + data.scrollX,
                             event.pos[1] + data.scrollY]
-        msg+='B3 %s\n'%(str(event.pos))
+        msg+='move %d %d\n'%(event.pos[0]+data.scrollX,event.pos[1]+data.scrollY)
 
     if (event.button == 3 and data.fireOn == 'on'):
         data.player.fireDest = list(event.pos)
@@ -93,7 +94,6 @@ def mouseDown(event, data):
 
 
 def mouseUp(event, data):
-    print(data.players)
 	if(event.button==3):
 		data.player.autoAttack(data,event.pos)
 	if (event.button == 3 and data.fireOn == 'off'):
@@ -189,6 +189,11 @@ def timerFired(data):
                         data.players.add(user)
                         print('player added')
                         break
+                    elif (character == 'yoshi'):
+                        user = Yoshi.Yoshi(data, (50, 50), newPID,'blue')
+                        data.players.add(user)
+                        print('player added')
+                        break
                     print('invalid input')
                 print(data.players)
 
@@ -200,7 +205,7 @@ def timerFired(data):
                 user=msg[1]
                 for player in data.players:
                     if(player.name==user):
-                        player.dest=[coords[0]+data.scrollX,coords[1]+data.scrollY]
+                        player.dest=[coords[0],coords[1]]
 
             if(command=='B1'):
                 user=msg[1]
@@ -249,10 +254,9 @@ def timerFired(data):
             print("failed")
             serverMsg.task_done()
 
-	data.timer += 250
-	data.leftMinions.update(data.timer, data)
-	data.rightMinions.update(data.timer, data)
-	pass
+    data.timer += 250
+    data.leftMinions.update(data.timer, data)
+    data.rightMinions.update(data.timer, data)
 
 
 def redrawAll(display, data):

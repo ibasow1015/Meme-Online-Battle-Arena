@@ -4,7 +4,6 @@ import os
 import math
 
 class Bowser(Characters.Player):
-<<<<<<< HEAD
     def __init__(self, data, pos, name,team):
         Characters.Player.__init__(self,data, pos, name,team)
         x, y = pos
