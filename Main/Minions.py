@@ -49,6 +49,7 @@ class Minion(sprite.Sprite):
         self.speed = data.unit * 2
         self.width = 30
         self.height = 30
+        self.hitbox = 25
         Minion.minions.add(self)
 
     def getHealth(self):
