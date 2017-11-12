@@ -82,7 +82,7 @@ class Player(pygame.sprite.Sprite):
 	def getDestination(self):
 		return self.dest
 
-class Test(Player):
+class Mario(Player):
 	def __init__(self, x, y, name):
 		Player.__init__(self, x, y, name)
 		self.width=25
@@ -93,6 +93,8 @@ class Test(Player):
 		self.rect.center = (x, y)
 		self.width=25
 		self.height=50
+
+		self.character='Mario'
 
 		self.regen=10
 
@@ -123,8 +125,8 @@ class Test(Player):
 				self.ability4Time=0
 				self.armor-=20
 				self.maxHealth-=600
-				self.width=25
-				self.height=50
+				self.width-=75
+				self.height-=150
 				if(self.health>self.maxHealth):
 					self.health=self.maxHealth
 		if(self.ability3Active):
@@ -132,11 +134,10 @@ class Test(Player):
 			if(self.ability3Time>=self.ability3Timer):
 				self.ability3Active=False
 				self.ability3Time=0
-				self.armor-=0
+				self.armor-=10
 				self.health-=10
-				self.width=25
-				self.height=50
-
+				self.width-=25
+				self.height-=50
 
 	def ability1(self):
 		self.health -= 50
@@ -147,29 +148,32 @@ class Test(Player):
 		    self.energy = self.maxEnergy
 
 	def ability2(self):
-		self.health += 50
-		if (self.health > self.maxHealth):
-		    self.health = self.maxHealth
-		self.energy -= 50
-		if (self.energy < 0):
-		    self.energy = 0
+		if(self.energy>50):
+			self.health += 50
+			if (self.health > self.maxHealth):
+			    self.health = self.maxHealth
+			self.energy -= 50
+			if (self.energy < 0):
+			    self.energy = 0
 
 	def ability3(self):
-		self.energy-=100
-		self.ability3Active=True
-		self.armor+=10
-		self.health+=10
-		self.width=50
-		self.height=100
+		if(self.energy>100 and self.ability3Active==False):
+			self.energy-=100
+			self.ability3Active=True
+			self.armor+=10
+			self.health+=10
+			self.width+=25
+			self.height+=50
 
 	def ability4(self):
-		self.energy-=200
-		self.ability4Active=True
-		self.armor+=20
-		self.maxHealth+=600
-		self.health+=600
-		self.width=100
-		self.height=200
+		if(self.energy>200 and self.ability4Active==False):
+			self.energy-=200
+			self.ability4Active=True
+			self.armor+=20
+			self.maxHealth+=600
+			self.health+=600
+			self.width+=75
+			self.height+=150
 
 	def getCenter(self):
 		return self.rect.center
@@ -224,7 +228,7 @@ class Test(Player):
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 
 def initCharacter(data):
-    data.player = Test(50, 50, 'Player1')
+    data.player = Mario(50, 50, 'Player1')
     data.players.add(data.player)
 
 def drawCharacter(display, data):
