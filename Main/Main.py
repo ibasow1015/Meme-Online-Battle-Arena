@@ -9,7 +9,6 @@ import ChainChomp
 
 
 def init(data):
-<<<<<<< HEAD
 	data.mapWidth = 7000
 	data.mapHeight = 7000
 	data.unit = data.width / 100
