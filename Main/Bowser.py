@@ -1,6 +1,7 @@
 import Characters
 import pygame
 import os
+import math
 
 class Bowser(Characters.Player):
 	def __init__(self, data, pos, name):
@@ -167,6 +168,49 @@ class Bowser(Characters.Player):
 
 	def getCenter(self):
 		return self.rect.center
+
+	def move(self, data, epsilon=6):
+		super().move(data, epsilon)
+		fdestX, fdestY = self.fireDest[0], self.fireDest[1]
+		fx, fy = self.fireRect.center[0], self.fireRect.center[1]
+		fdx = fdestX - fx
+		fdy = fdestY - fy
+		fxDir, fyDir = 1, 1
+		if (fdx < 0):
+			fxDir = -1
+		if (fdy < 0):
+			fyDir = -1
+		if (fdy < epsilon and fdy > -epsilon and fdx < epsilon and fdx >
+				-epsilon):
+			self.fireRect.center = (fx, fy)
+			self.fireOn = 'off'
+		elif (fdy < epsilon and fdy > -epsilon):
+			self.fireRect.center = (fx + self.speed * fxDir, fy)
+			if (fxDir > 0):
+				self.animationDirection = 'right'
+			else:
+				self.animationDirection = 'left'
+		elif (fdx < epsilon and fdx > -epsilon):
+			self.fireRect.center = (fx, fy + self.speed * fyDir)
+			if (fxDir > 0):
+				self.animationDirection = 'right'
+			else:
+				self.animationDirection = 'left'
+		else:
+				# get vector angle
+			theta = abs(math.atan(fdy / fdx))
+				# calculate unit vector
+			i = self.speed * math.cos(theta) * fxDir
+			j = self.speed * math.sin(theta) * fyDir
+			self.fireRect.center = (fx + i, fy + j)
+			self.movementState = 'moving'
+			if (abs(i) > abs(j) or fyDir == 1):
+				if (fxDir > 0):
+					self.animationDirection = 'right'
+				else:
+					self.animationDirection = 'left'
+			else:
+				self.animationDirection = 'up'
 
 	def animateWalk(self,direction):
 		self.animationState+=1
