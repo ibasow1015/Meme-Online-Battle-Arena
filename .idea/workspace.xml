@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7b0e17c-49c8-4cee-ad8f-b9777642f590" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Meme-Online-Battle-Arena.iml" afterPath="$PROJECT_DIR$/.idea/Meme-Online-Battle-Arena.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/Characters.py" afterPath="$PROJECT_DIR$/Main/Characters.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/Main.py" afterPath="$PROJECT_DIR$/Main/Main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/Minions.py" afterPath="$PROJECT_DIR$/Main/Minions.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,38 +17,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Meme_Online_Battle_Arena$Main.coverage" NAME="Main Coverage Results" MODIFIED="1510453526598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
     <SUITE FILE_PATH="coverage/Meme_Online_Battle_Arena$setup.coverage" NAME="setup Coverage Results" MODIFIED="1510430150472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/pip_build_nigel/pygame" />
     <SUITE FILE_PATH="coverage/Meme_Online_Battle_Arena$drawMap.coverage" NAME="drawMap Coverage Results" MODIFIED="1510444121753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
-    <SUITE FILE_PATH="coverage/Meme_Online_Battle_Arena$Main.coverage" NAME="Main Coverage Results" MODIFIED="1510450243500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
     <SUITE FILE_PATH="coverage/Meme_Online_Battle_Arena$Catan.coverage" NAME="Catan Coverage Results" MODIFIED="1510449367096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Catan" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Catan.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Catan/Catan.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Board.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Catan/Board.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="69" column="72" lean-forward="false" selection-start-line="69" selection-start-column="72" selection-end-line="69" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="drawMap.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/drawMap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+            <state relative-caret-position="-952">
+              <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -57,7 +41,6 @@
               <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
               </folding>
             </state>
           </provider>
@@ -76,15 +59,9 @@
       <file leaf-file-name="Minions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/Minions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-                <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-                <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-                <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-                <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-              </folding>
+            <state relative-caret-position="224">
+              <caret line="71" column="31" lean-forward="true" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,8 +69,8 @@
       <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+            <state relative-caret-position="1386">
+              <caret line="66" column="8" lean-forward="false" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -117,11 +94,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Main/Characters.py" />
-        <option value="$PROJECT_DIR$/Main/Minions.py" />
         <option value="$PROJECT_DIR$/Main/drawMap.py" />
         <option value="$PROJECT_DIR$/../Catan/Board.py" />
         <option value="$PROJECT_DIR$/../Catan/Catan.py" />
         <option value="$PROJECT_DIR$/Main/Main.py" />
+        <option value="$PROJECT_DIR$/Main/Minions.py" />
       </list>
     </option>
   </component>
@@ -152,8 +129,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,25 +141,18 @@
               <item name="Meme-Online-Battle-Arena" type="462c0819:PsiDirectoryNode" />
               <item name="Main" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Meme-Online-Battle-Arena" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Catan" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Meme-Online-Battle-Arena" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Catan" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
@@ -192,124 +160,6 @@
       <recent name="$PROJECT_DIR$/../Catan/images" />
       <recent name="C:\Users\nigel\OneDrive\Documents\GitHub\Meme-Online-Battle-Arena\Main" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/Characters.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/Main.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/Minions.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/__pycache__/Minions.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/__pycache__/UI.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/__pycache__/characters.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/__pycache__/drawMap.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/__pycache__/icons.cpython-36.pyc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Main/drawMap.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -348,7 +198,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6" />
+      <option name="SDK_HOME" value="C:\Users\nigel\AppData\Local\Programs\Python\Python36-32\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -446,13 +296,13 @@
     <frame x="56" y="42" width="1624" height="837" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15549937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15826873" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884097" sideWeight="0.5025284" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32533732" sideWeight="0.502584" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884097" sideWeight="0.49747154" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32614556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32533732" sideWeight="0.49741602" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -517,13 +367,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="34" lean-forward="false" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -566,7 +410,6 @@
           <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
           </folding>
         </state>
       </provider>
@@ -582,13 +425,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -616,7 +453,6 @@
           <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
           </folding>
         </state>
       </provider>
@@ -625,13 +461,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -674,7 +504,6 @@
           <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
           </folding>
         </state>
       </provider>
@@ -683,13 +512,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -717,7 +540,6 @@
           <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
           </folding>
         </state>
       </provider>
@@ -726,13 +548,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -760,7 +576,6 @@
           <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
           </folding>
         </state>
       </provider>
@@ -779,13 +594,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="24" column="34" lean-forward="false" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -803,7 +612,6 @@
           <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
           </folding>
         </state>
       </provider>
@@ -812,13 +620,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="34" lean-forward="false" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -838,36 +640,11 @@
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/pygame/sprite.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/pygame/__init__.py" />
     <entry file="file://$USER_HOME$/Desktop/15-112/week6 hw/hw6.py" />
-    <entry file="file://$PROJECT_DIR$/Main/Minions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <marker date="1510450117000" expanded="true" signature="356:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1136:1149" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1220:1445" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1471:1498" ph="..." />
-            <marker date="1510450117000" expanded="true" signature="1533:1569" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Main/UI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/Characters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1510450117000" expanded="true" signature="63:1329" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -878,34 +655,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Catan/Board.py">
+    <entry file="file://$PROJECT_DIR$/../Catan/Board.py" />
+    <entry file="file://$PROJECT_DIR$/../Catan/Catan.py" />
+    <entry file="file://$PROJECT_DIR$/Main/Characters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="69" column="72" lean-forward="false" selection-start-line="69" selection-start-column="72" selection-end-line="69" selection-end-column="72" />
+        <state relative-caret-position="210">
+          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/Minions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="71" column="31" lean-forward="true" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/drawMap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Catan/Catan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        <state relative-caret-position="-952">
+          <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+        <state relative-caret-position="1386">
+          <caret line="66" column="8" lean-forward="false" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

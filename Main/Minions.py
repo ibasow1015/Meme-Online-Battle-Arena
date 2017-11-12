@@ -16,7 +16,7 @@ class Minion(sprite.Sprite):
     minions = Minions()
     def __init__(self, startingPosition, data):
         super(Minion, self).__init__()
-        self.image = Surface((data.unit * 5, data.unit * 5))
+        self.image = Surface((30, 30))
         self.rect = self.image.get_rect()
         self.rect.center = startingPosition
         self.damageReduction = 0.1
@@ -35,8 +35,8 @@ class Minion(sprite.Sprite):
 
     def update(self, timer, data):
         if not timer % 1000:
-            self.rect.x += data.unit
-            self.rect.y += data.unit
+            self.rect.x += 10
+            self.rect.y += 6
 
     def setX(self, x):
         self.rect.x += x

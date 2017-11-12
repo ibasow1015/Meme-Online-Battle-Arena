@@ -64,8 +64,7 @@ def keyDown(event, data):
 
 
 def keyUp(event, data):
-    if (event.key == 273):
-        data.downPressed = False
+    pass
 
 
 def timerFired(data):
@@ -146,4 +145,4 @@ def run(width=300, height=300):
         timerFiredWrapper(display, data)
 
 
-run(600, 600)
+run(1920, 1080)

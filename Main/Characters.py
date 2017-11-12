@@ -38,7 +38,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.center = (x + i, y + j)
 
     def update(self):
-        self.move(15)
+        self.move()
 
     def setX(self, x):
         self.rect.x += x
