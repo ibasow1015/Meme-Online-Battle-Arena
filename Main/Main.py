@@ -17,45 +17,37 @@ def init(data):
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
     data.minionNum = 1
+    data.mapStep = 50
 
 
 def mouseDown(event, data):
     if (event.button == 3):
-        data.player.dest = list(event.pos)
+        data.player.dest = [event.pos[0] + data.scrollX,\
+                            event.pos[1] + data.scrollY]
 
 
 def mouseUp(event, data):
     pass
+
+def keypress(data):
+    keys = pygame.key.get_pressed()
+    x, y = 0, 0
+    if keys[pygame.K_w] and data.scrollY > -200:
+        y += -1
+    if keys[pygame.K_s] and data.scrollY < data.mapHeight:
+        y += 1
+    if keys[pygame.K_a] and data.scrollX > -200:
+        x += -1
+    if keys[pygame.K_d] and data.scrollX < data.mapWidth:
+        x += 1
+    drawMap.move(data, x, y)
+    data.minions.move(-x, -y, data)
 
 
 def keyDown(event, data):
     # print(event.key)
 
     # print(data.scrollX)
-    if (event.key == 119 and data.scrollY > -200):
-        drawMap.move(data, 0, -1)
-        data.player.setY(data.mapStep)
-        data.player.changeDestination(0, data.mapStep)
-        for minion in data.minions.sprites():
-            minion.setY(data.mapStep)
-    elif (event.key == 115 and data.scrollY < 7200):
-        drawMap.move(data, 0, 1)
-        data.player.setY(-data.mapStep)
-        data.player.changeDestination(0, -data.mapStep)
-        for minion in data.minions.sprites():
-            minion.setY(-data.mapStep)
-    elif (event.key == 97 and data.scrollX > -200):
-        drawMap.move(data, -1, 0)
-        data.player.setX(data.mapStep)
-        data.player.changeDestination(data.mapStep, 0)
-        for minion in data.minions.sprites():
-            minion.setX(data.mapStep)
-    elif (event.key == 100 and data.scrollX < 7200):
-        drawMap.move(data, 1, 0)
-        data.player.setX(-data.mapStep)
-        data.player.changeDestination(-data.mapStep, 0)
-        for minion in data.minions.sprites():
-            minion.setX(-data.mapStep)
 
     if (event.unicode == '1'):
         data.player.ability1()
@@ -148,6 +140,9 @@ def run(width=300, height=300):
                 mouseDownWrapper(event, display, data)
             if (event.type == MOUSEBUTTONUP):
                 mouseUpWrapper(event, display, data)
+
+        keypress(data)
+
         timerFiredWrapper(display, data)
 
 

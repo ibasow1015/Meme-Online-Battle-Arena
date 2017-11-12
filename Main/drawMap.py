@@ -9,9 +9,6 @@ def drawMap(data, display):
     height = data.mapHeight
     width = data.mapWidth
 
-    # when use arrow keys
-    data.mapStep = 200
-
     sx = data.scrollX
     sy = data.scrollY
 

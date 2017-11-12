@@ -22,6 +22,10 @@ class Minions(sprite.Group):
         self.add(Melee((position[0], position[1] + 1 * 28), side, lane, data))
         self.add(Melee((position[0], position[1] + 0 * 28), side, lane, data))
 
+    def move(self, x, y, data):
+        for minion in self.sprites():
+            minion.setCenter(x, y, data)
+
 class Minion(sprite.Sprite):
     minions = Minions()
 
@@ -63,12 +67,10 @@ class Minion(sprite.Sprite):
                                                      (self.width, self.height))
                         self.rect.x += 6
 
-    def setX(self, x):
-        self.rect.x += x
-
-    def setY(self, y):
-        self.rect.y += y
-
+        print(self.rect.center)
+    def setCenter(self, x, y, data):
+        self.rect.x += x * data.mapStep
+        self.rect.y += y * data.mapStep
     def getValue(self, cs):
         pass
 
