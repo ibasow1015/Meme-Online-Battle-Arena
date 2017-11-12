@@ -47,7 +47,7 @@ def mouseDown(event, data):
 
     if (event.button == 3 and data.fireOn == 'on'):
         data.player.fireDest = list(event.pos)
-        if data.player.getName() == "bowser":
+        if data.player.getName() == "Bowser":
             if data.player.fireOn == 'off':
                 data.player.ability3()
         data.fireOn = "off"
@@ -82,8 +82,10 @@ def keyDown(event, data):
     if (event.unicode == '2'):
         data.player.ability2()
     if (event.unicode == '3'):
-        data.fireOn = "on" if data.player.getName() == "Bowser" else data.fireOn
-        data.player.ability3()
+        if data.player.getName() == 'Bowser':
+	        data.fireOn = 'on'
+        else:
+            data.player.ability3()
     if (event.unicode == '4'):
         data.player.ability4()
 
