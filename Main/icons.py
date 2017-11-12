@@ -16,7 +16,6 @@ class ArmorIcon(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(os.path.join('sprites/armor_icon.png'))
         self.image=pygame.transform.scale(self.image,(int(data.width*.02),int(data.width*.02)))
-        self.image.fill((255, 255, 0))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
