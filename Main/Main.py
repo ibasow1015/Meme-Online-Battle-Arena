@@ -61,6 +61,10 @@ def keyDown(event, data):
         data.player.ability1()
     if (event.unicode == '2'):
         data.player.ability2()
+    if (event.unicode == '3'):
+        data.player.ability3()
+    if (event.unicode == '4'):
+        data.player.ability4()
 
 
 def keyUp(event, data):
