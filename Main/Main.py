@@ -5,19 +5,24 @@ import UI
 import icons
 import Minions
 import drawMap
+import ChainChomp
 
 
 def init(data):
-    data.unit = data.width / 100
-    data.players = pygame.sprite.Group()
-    Characters.initCharacter(data)
-    data.minions = Minions.Minions()
-    data.minion = Minions.Minion((100, 30), data)
-    data.minions.add(data.minion)
-    data.timer = 0
-    icons.initIcons(data)
-    data.scrollX = data.scrollY = 0
-    data.mapStep = 50
+	data.mapWidth = 7000
+	data.mapHeight = 7000
+	data.unit = data.width / 100
+	data.towers=pygame.sprite.Group()
+	ChainChomp.initTowers(data)
+	data.players = pygame.sprite.Group()
+	Characters.initCharacter(data)
+	data.minions = Minions.Minions()
+	data.minion = Minions.Minion((100, 30), data)
+	data.minions.add(data.minion)
+	data.timer = 0
+	icons.initIcons(data)
+	data.scrollX = data.scrollY = 0
+	data.mapStep = 50
 
 
 def mouseDown(event, data):
@@ -74,6 +79,7 @@ def redrawAll(display, data):
     drawMap.drawMap(data, display)
     Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
+    ChainChomp.updateTowers(display,data)
     UI.drawTaskbar(display, data)
     icons.drawIcons(display, data)
 
