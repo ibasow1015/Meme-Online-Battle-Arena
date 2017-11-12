@@ -18,6 +18,7 @@ class Mario(Characters.Player):
         self.height = 50
 
         self.character = 'Mario'
+        self.letter='M'
 
         self.regen = 10
 

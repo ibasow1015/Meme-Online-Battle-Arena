@@ -59,7 +59,7 @@ playerNum = 0
 serverChannel = Queue(100)
 threading.Thread(target=serverThread, args=(clientele, serverChannel)).start()
 
-names = ["Player1", "Player2", "Player3", "Player4"]
+names = ["Player2", "Player3", "Player4", "Player5"]
 
 while True:
     client, address = server.accept()
