@@ -7,7 +7,7 @@ class Mario(Characters.Player):
 		Characters.Player.__init__(self, data, pos, name)
 		self.width=25
 		self.height=50
-		self.image=pygame.image.load(os.path.join('sprites/mario_r1.png'))
+		self.image=pygame.image.load(os.path.join('sprites/mario/mario_r1.png'))
 		self.image=pygame.transform.scale(self.image,(self.width,self.height))
 		self.rect = self.image.get_rect()
 		self.rect.center = pos
@@ -103,46 +103,46 @@ class Mario(Characters.Player):
 		self.animationState%=4
 		if(direction=='right'):
 			if(self.movementState=='still'):
-				self.image=pygame.image.load(os.path.join('sprites/mario_r1.png'))
+				self.image=pygame.image.load(os.path.join('sprites/mario/mario_r1.png'))
 				self.image=pygame.transform.scale(self.image,(self.width,self.height))
 			else:
 				if(self.animationState==0):
-					self.image=pygame.image.load(os.path.join('sprites/mario_r1.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_r1.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				elif(self.animationState==1):
-					self.image=pygame.image.load(os.path.join('sprites/mario_r2.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_r2.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				elif(self.animationState==2):
-					self.image=pygame.image.load(os.path.join('sprites/mario_r3.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_r3.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				elif(self.animationState==3):
-					self.image=pygame.image.load(os.path.join('sprites/mario_r4.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_r4.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 		if(direction=='left'):
 			if(self.movementState=='still'):
-				self.image=pygame.image.load(os.path.join('sprites/mario_l1.png'))
+				self.image=pygame.image.load(os.path.join('sprites/mario/mario_l1.png'))
 				self.image=pygame.transform.scale(self.image,(self.width,self.height))
 			else:
 				if(self.animationState==0):
-					self.image=pygame.image.load(os.path.join('sprites/mario_l1.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_l1.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				elif(self.animationState==1):
-					self.image=pygame.image.load(os.path.join('sprites/mario_l2.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_l2.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				elif(self.animationState==2):
-					self.image=pygame.image.load(os.path.join('sprites/mario_l3.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_l3.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				elif(self.animationState==3):
-					self.image=pygame.image.load(os.path.join('sprites/mario_l4.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_l4.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 		if(direction=='up'):
 			if(self.movementState=='still'):
-				self.image=pygame.image.load(os.path.join('sprites/mario_uN.png'))
+				self.image=pygame.image.load(os.path.join('sprites/mario/mario_uN.png'))
 				self.image=pygame.transform.scale(self.image,(self.width,self.height))
 			else:
 				if(self.animationState==0 or self.animationState==2):
-					self.image=pygame.image.load(os.path.join('sprites/mario_u1.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_u1.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				elif(self.animationState==1 or self.animationState==3):
-					self.image=pygame.image.load(os.path.join('sprites/mario_u2.png'))
+					self.image=pygame.image.load(os.path.join('sprites/mario/mario_u2.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
