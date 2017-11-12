@@ -1,11 +1,12 @@
 import pygame
+import os
 
 
 class GoldIcon(pygame.sprite.Sprite):
     def __init__(self, data, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((data.width * .03, data.width * .03))
-        self.image.fill((255, 255, 0))
+        self.image = pygame.image.load(os.path.join('sprites/gold_icon.png'))
+        self.image=pygame.transform.scale(self.image,(int(data.width*.03),int(data.width*.03)))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
@@ -13,7 +14,8 @@ class GoldIcon(pygame.sprite.Sprite):
 class ArmorIcon(pygame.sprite.Sprite):
     def __init__(self, data, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((data.width * .02, data.width * .02))
+        self.image = pygame.image.load(os.path.join('sprites/armor_icon.png'))
+        self.image=pygame.transform.scale(self.image,(int(data.width*.02),int(data.width*.02)))
         self.image.fill((255, 255, 0))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -22,8 +24,8 @@ class ArmorIcon(pygame.sprite.Sprite):
 class SpeedIcon(pygame.sprite.Sprite):
     def __init__(self, data, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((data.width * .02, data.width * .02))
-        self.image.fill((255, 255, 0))
+        self.image = pygame.image.load(os.path.join('sprites/speed_icon.png'))
+        self.image=pygame.transform.scale(self.image,(int(data.width*.02),int(data.width*.02)))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
@@ -31,8 +33,8 @@ class SpeedIcon(pygame.sprite.Sprite):
 class RegenIcon(pygame.sprite.Sprite):
     def __init__(self, data, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((data.width * .02, data.width * .02))
-        self.image.fill((255, 255, 0))
+        self.image = pygame.image.load(os.path.join('sprites/regen_icon.png'))
+        self.image=pygame.transform.scale(self.image,(int(data.width*.02),int(data.width*.02)))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
@@ -40,8 +42,8 @@ class RegenIcon(pygame.sprite.Sprite):
 class ResistIcon(pygame.sprite.Sprite):
     def __init__(self, data, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((data.width * .02, data.width * .02))
-        self.image.fill((255, 255, 0))
+        self.image = pygame.image.load(os.path.join('sprites/resist_icon.png'))
+        self.image=pygame.transform.scale(self.image,(int(data.width*.02),int(data.width*.02)))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 

@@ -31,7 +31,6 @@ def mouseUp(event, data):
 
 
 def keyDown(event, data):
-	print(event.key)
 
 	# up
 	if (event.key == 273 and data.scrollY > -200):
@@ -48,6 +47,11 @@ def keyDown(event, data):
 	# right
 	elif (event.key == 275 and data.scrollX < 7200):
 		drawMap.move(data, 1, 0)
+
+	if(event.unicode=='1'):
+		data.player.ability1()
+	elif(event.unicode=='2'):
+		data.player.ability2()
 
 
 def keyUp(event, data):
