@@ -70,7 +70,7 @@ class Bowser(Characters.Player):
 		if (self.energy > 10):
 			self.energy -= 10
 			if(self.fireOn == 'on'):
-				self.fireOn == 'off'
+				self.fireOn = 'off'
 			elif(self.fireOn == 'off'):
 				self.fireOn = 'on'
 			self.fireRect.center = (self.rect.center[0], self.rect.center[1])
