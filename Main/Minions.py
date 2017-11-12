@@ -157,5 +157,5 @@ class Melee(Minion):
             return self.lastHit
         return self.assist
 
-    def autoAttack(self, direction):
-        
+   #def autoAttack(self, direction):
+

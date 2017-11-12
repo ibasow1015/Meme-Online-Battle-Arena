@@ -67,6 +67,10 @@ def drawAbilitySlots(display, data):
         pygame.draw.rect(display, (0, 0, 255), (
         boxX + slotMargin + (slotMargin + slotWidth) * i, boxY + slotMargin,
         slotWidth, slotWidth))
+    if(data.player.character=='Bowser' and data.player.fireOn=='on'):
+        pygame.draw.rect(display, (255, 255, 0), (
+        boxX + slotMargin + (slotMargin + slotWidth) * 2, boxY + slotMargin,
+        slotWidth, slotWidth),4)
 
 
 def drawResourceBars(display, data):

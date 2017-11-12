@@ -6,6 +6,7 @@ import icons
 import Minions
 import drawMap
 import ChainChomp
+import Projectiles
 
 
 def init(data):
@@ -42,16 +43,19 @@ def init(data):
     data.scrollX = data.scrollY = 0
     data.fireOn = "off"
     data.mapStep = 50
+    Projectiles.initProjectiles(data)
 
 
 def mouseDown(event, data):
+    if(event.button==3):
+        data.player.autoAttack(data,event.pos)
     if (event.button == 3 and data.fireOn == 'off'):
         data.player.dest = [event.pos[0] + data.scrollX,
                             event.pos[1] + data.scrollY]
 
     if (event.button == 3 and data.fireOn == 'on'):
         data.player.fireDest = list(event.pos)
-        if data.player.getName() == "bowser":
+        if data.player.getName() == "Bowser":
             if data.player.fireOn == 'off':
                 data.player.ability3()
         data.fireOn = "off"
@@ -87,8 +91,10 @@ def keyDown(event, data):
     if (event.unicode == '2'):
         data.player.ability2()
     if (event.unicode == '3'):
-        data.fireOn = "on" if data.player.getName() == "Bowser" else data.fireOn
-        data.player.ability3()
+        if data.player.getName() == 'Bowser':
+	        data.fireOn = 'on'
+        else:
+            data.player.ability3()
     if (event.unicode == '4'):
         data.player.ability4()
 
@@ -111,6 +117,8 @@ def redrawAll(display, data):
     Characters.drawCharacter(display, data)
     data.leftMinions.drawMinions(display)
     data.rightMinions.drawMinions(display)
+    ChainChomp.updateTowers(display,data)
+    Projectiles.drawProjectiles(display,data)
     UI.drawTaskbar(display, data)
     icons.drawIcons(display, data)
 
