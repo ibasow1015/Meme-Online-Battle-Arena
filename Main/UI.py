@@ -1,9 +1,7 @@
 import pygame
-import drawMap
 
 
 def drawTaskbar(display, data):
-    #drawMinimap(display, data)
     drawStats(display, data)
     drawItemSlots(display, data)
     drawAbilitySlots(display, data)
@@ -34,7 +32,7 @@ def drawItemSlots(display, data):
 def drawStats(display, data):
     boxX = data.width * .18
     boxY = data.height - data.width * .13
-    boxWidth = data.width * .125
+    boxWidth = data.width * .12
     boxHeight = data.width * .13
     pygame.draw.rect(display, (0, 0, 0), (boxX, boxY, boxWidth, boxHeight))
     armorLabel = data.font.render(str(data.player.armor), 1, (255, 255, 255))
@@ -61,7 +59,7 @@ def drawAbilitySlots(display, data):
     boxX = data.width * .3
     boxY = data.height - data.width * .13
     boxWidth = data.width * .3
-    boxHeight = data.height -data.width* .085
+    boxHeight = data.height * .085
     pygame.draw.rect(display, (0, 0, 0), (boxX, boxY, boxWidth, boxHeight))
     slotMargin = data.width * .0125
     slotWidth = data.width * .06
@@ -77,7 +75,6 @@ def drawResourceBars(display, data):
     EnergyboxY = data.height - data.width * .025
     boxWidth = data.width * .3
     boxHeight = data.height * .025
-    
     healthLabel=data.font.render(str(data.player.health)+'/'+str(data.player.maxHealth),1,(0,0,0))
     pygame.draw.rect(display, (255, 0, 0),
                      (boxX, HealthboxY, boxWidth, boxHeight))
@@ -85,7 +82,6 @@ def drawResourceBars(display, data):
     pygame.draw.rect(display, (0, 255, 0),
                      (boxX, HealthboxY, boxWidth * healthPercentage, boxHeight))
     display.blit(healthLabel,(data.width*.42,data.height-data.width*.05))
-
     energyLabel=data.font.render(str(data.player.energy)+'/'+str(data.player.maxEnergy),1,(0,0,0))
     pygame.draw.rect(display, (255, 0, 0),
                      (boxX, EnergyboxY, boxWidth, boxHeight))
@@ -93,8 +89,3 @@ def drawResourceBars(display, data):
     pygame.draw.rect(display, (255, 255, 0),
                      (boxX, EnergyboxY, boxWidth * energyPercentage, boxHeight))
     display.blit(energyLabel,(data.width*.42,data.height-data.width*.025))
-
-
-def drawMinimap(display, data):
-    print(data.minimap.width)
-    data.minimap.drawMap(display)

@@ -18,14 +18,14 @@ class Minions(sprite.Group):
     def spawnMinionWave(self, position, destination, side, lane, data):
         if lane == "top":
             for i in range(5):
-                x = i * 28 * (side == "left")
-                y = i * 28 * (side == "right")
+                x = i * 28 * (side == "right")
+                y = i * 28 * (side == "left")
                 self.add(Melee((position[0] + x, position[1] + y), destination,
                                side, lane, data))
         if lane == "bottom":
             for i in range(5):
-                x = i * 28 * (side == "right")
-                y = i * 28 * (side == "left")
+                x = i * 28 * (side == "left")
+                y = i * 28 * (side == "right")
                 self.add(Melee((position[0] + x, position[1] + y),
                                destination, side, lane, data))
 
