@@ -4,8 +4,8 @@ import os
 
 
 class Mario(Characters.Player):
-    def __init__(self, data, pos, name):
-        Characters.Player.__init__(self, data, pos, name)
+    def __init__(self, data, pos, name,team):
+        Characters.Player.__init__(self, data, pos, name,team)
         self.width = 25
         self.height = 50
         self.image = pygame.image.load(
@@ -31,6 +31,9 @@ class Mario(Characters.Player):
         self.damage = 0
         self.magic = 0
         self.resist = 0
+
+        self.attackRange=1000
+        self.projectileSpeed=5
 
         self.ability4Active = False
         self.ability4Time = 0

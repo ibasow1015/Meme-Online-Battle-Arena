@@ -4,8 +4,8 @@ import os
 
 
 class Bowser(Characters.Player):
-    def __init__(self, data, pos, name):
-        Characters.Player.__init__(self, data, pos, name)
+    def __init__(self, data, pos, name,team):
+        Characters.Player.__init__(self, data, pos, name,team)
         x, y = pos
         self.width = 25
         self.height = 50

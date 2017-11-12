@@ -1,9 +1,9 @@
 import pygame
 import math
-
+import Projectiles
 
 class Player(pygame.sprite.Sprite):
-	def __init__(self, data, pos, name):
+	def __init__(self, data, pos, name,team):
 		pygame.sprite.Sprite.__init__(self)
 		x, y = pos
 		self.dest = [x, y]
@@ -16,6 +16,7 @@ class Player(pygame.sprite.Sprite):
 		self.name = name
 		self.fireOn = 'off'
 		self.fireState = 0
+		self.autoAttackState=False
 
 
 
@@ -77,6 +78,17 @@ class Player(pygame.sprite.Sprite):
 
 
 		#print('bowser', self.rect.center)
+
+	def autoAttack(self,data,pos):
+		for minion in data.minions:
+			if(minion.rect.collidepoint(pos)):
+				dist=((self.rect.center[0]-minion.rect.center[0])**2+(self.rect.center[1]+minion.rect.center[1])**2)**.5
+				print(dist)
+				if(dist<=self.attackRange):
+					self.autoAttackState=True
+					print('projectile fired')
+					data.projectiles.add(Projectiles.Projectile(self.rect.center,minion,self.projectileSpeed,self.damage))
+
 
 	def drawFire(self, display):
 		self.ability3Move()
@@ -146,10 +158,10 @@ def initCharacter(data):
 		print('Select character:')
 		character = input('-->').lower()
 		if (character == 'mario'):
-			data.player = Mario.Mario(data, (50, 50), 'Player1')
+			data.player = Mario.Mario(data, (50, 50), 'Player1','red')
 			break
 		elif (character == 'bowser'):
-			data.player = Bowser.Bowser(data, (50, 50), 'Player1')
+			data.player = Bowser.Bowser(data, (50, 50), 'Player1','')
 			break
 		print('invalid input')
 	data.players.add(data.player)
