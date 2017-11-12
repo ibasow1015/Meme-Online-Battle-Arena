@@ -90,11 +90,12 @@ class Player(pygame.sprite.Sprite):
 import Mario
 import Bowser
 
+
 def initCharacter(data):
 	data.player=None
 	while(data.player==None):
 		print('Select character:')
-		character=input('-->')
+		character=input('-->').lower()
 		if(character=='mario'):
 			data.player=Mario.Mario(data,(50,50),'Player1')
 			break
