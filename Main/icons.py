@@ -73,7 +73,7 @@ class DamageIcon(pygame.sprite.Sprite):
 class MarioAbility4Icon(pygame.sprite.Sprite):
     def __init__(self,data,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.image.load(os.path.join('sprites/mario_star.png'))
+        self.image=pygame.image.load(os.path.join('sprites/mario/mario_star.png'))
         self.image=pygame.transform.scale(self.image,(int(data.width*.06),int(data.width*.06)))
         self.rect=self.image.get_rect()
         self.rect.center=(x,y)
@@ -81,7 +81,7 @@ class MarioAbility4Icon(pygame.sprite.Sprite):
 class MarioAbility3Icon(pygame.sprite.Sprite):
     def __init__(self,data,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.image.load(os.path.join('sprites/mario_mushroom.png'))
+        self.image=pygame.image.load(os.path.join('sprites/mario/mario_mushroom.png'))
         self.image=pygame.transform.scale(self.image,(int(data.width*.06),int(data.width*.06)))
         self.rect=self.image.get_rect()
         self.rect.center=(x,y)
