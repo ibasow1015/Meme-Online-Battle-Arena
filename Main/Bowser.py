@@ -13,8 +13,6 @@ class Bowser(Characters.Player):
 		self.image=pygame.transform.scale(self.image,(self.width,self.height))
 		self.rect = self.image.get_rect()
 		self.rect.center = (x, y)
-		self.x = x
-		self.y = y
 
 		#i hate github
 
@@ -78,7 +76,6 @@ class Bowser(Characters.Player):
 			elif(self.fireOn == 'off'):
 				self.fireOn = 'on'
 			self.fireRect.center = (self.rect.center[0], self.rect.center[1])
-			self.x = 0
 
 
 	def ability3Move(self):
