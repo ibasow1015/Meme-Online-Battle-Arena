@@ -27,10 +27,6 @@ class Player(pygame.sprite.Sprite):
         if (dy < 0):
             yDir = -1
         if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
-<<<<<<< HEAD
-=======
-            #self.rect.center = (x, y)
->>>>>>> a602cdd315cfe4d22456323b7473033ae0044361
             self.movementState = 'still'
         elif (dy < epsilon and dy > -epsilon):
             x += self.speed*xDir
