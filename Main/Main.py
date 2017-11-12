@@ -5,7 +5,7 @@ import UI
 import icons
 import Minions
 import drawMap
-
+import time
 
 def init(data):
     data.unit = data.width / 100
@@ -18,7 +18,11 @@ def init(data):
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
     data.mapStep = 50
-
+    data.mapWidth = 7000
+    data.mapHeight = 7000
+    data.offset = data.scrollX, data.scrollY
+    data.map = drawMap.Map(data, data.mapWidth, data.mapHeight, data.offset)
+    data.minimap = drawMap.Map(data, data.mapWidth/20, data.mapHeight/20, (0,0))
 
 def mouseDown(event, data):
     if (event.button == 3):
@@ -40,7 +44,7 @@ def keypress(data):
         x += -1
     if keys[pygame.K_d] and data.scrollX < data.mapWidth:
         x += 1
-    drawMap.move(data, x, y)
+    drawMap.move(data, x, y,)
 
 
 def keyDown(event, data):
@@ -70,8 +74,7 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
-    drawMap.drawBoard(data, display)
-    drawMap.drawMap(data, display)
+    data.map.drawMap(display)
     Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
     UI.drawTaskbar(display, data)
@@ -143,6 +146,7 @@ def run(width=300, height=300):
         keypress(data)
 
         timerFiredWrapper(display, data)
+
 
 
 run(1280, 720)
