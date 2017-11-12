@@ -43,9 +43,6 @@ class Mario(Characters.Player):
         self.ability3Time = 0
         self.ability3Timer = 100
 
-    def getName(self):
-        return self.character
-
     def abilityTimers(self):
         if (self.ability4Active):
             self.ability4Time += 1

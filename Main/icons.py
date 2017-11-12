@@ -91,6 +91,14 @@ class MarioAbility3Icon(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.rect.center=(x,y)
 
+class BowserAbility3Icon(pygame.sprite.Sprite):
+    def __init__(self,data,x,y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image=pygame.image.load(os.path.join('sprites/fireball/fire_3.png'))
+        self.image=pygame.transform.scale(self.image,(int(data.width*.06),int(data.width*.06)))
+        self.rect=self.image.get_rect()
+        self.rect.center=(x,y)
+
 
 def initIcons(data):
     data.icons = pygame.sprite.Group()
@@ -121,6 +129,8 @@ def initIcons(data):
     if(data.player.character=='Mario'):
         data.icons.add(MarioAbility4Icon(data,ability4IconX,abilityIconY))
         data.icons.add(MarioAbility3Icon(data,ability3IconX,abilityIconY))
+    elif(data.player.character=='Bowser'):
+        data.icons.add(BowserAbility3Icon(data,ability3IconX,abilityIconY))
 
 
 def drawIcons(display, data):

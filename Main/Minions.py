@@ -27,7 +27,9 @@ class Minions(sprite.Group):
                 y = i * 28 * (side == "right")
         if lane == "mid":
             for i in range(5):
-                x = y = i * 28 * (-1 ** (side == "left"))
+                x = y = i * 28
+                x *= -1 if side == "right" else 1
+                y *= -1 if side == "left" else 1
                 self.add(Melee((position[0] + x, position[1] + y),
                                destination, side, lane, data))
 
@@ -49,6 +51,7 @@ class Minion(sprite.Sprite):
         self.speed = data.unit * 2
         self.width = 30
         self.height = 30
+        self.hitbox = 25
         Minion.minions.add(self)
 
     def getHealth(self):
@@ -65,16 +68,25 @@ class Minion(sprite.Sprite):
         if not timer % 1000:
             targetX = self.destination[1] - data.scrollY
             targetY = self.destination[1] - data.scrollX
-            if self.lane != "bottom":
+            if self.lane == "top":
                 if self.rect.x > targetY:
                     self.rect.x -= 10
                 if self.rect.y > targetX:
                     self.rect.y -= 10
-            if self.lane != "top":
+            if self.lane == "bottom":
                 if self.rect.x < targetY:
                     self.rect.x += 10
                 if self.rect.y < targetX:
                     self.rect.y += 10
+            if self.lane == "mid":
+                if self.rect.x > targetY:
+                    self.rect.x -= 20
+                if self.rect.y > targetX:
+                    self.rect.y -= 20
+                if self.rect.x < targetY:
+                    self.rect.x += 20
+                if self.rect.y < targetX:
+                    self.rect.y += 20
 
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
