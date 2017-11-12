@@ -12,7 +12,18 @@ def init(data):
     data.players = pygame.sprite.Group()
     Characters.initCharacter(data)
     data.minions = Minions.Minions()
-    data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
+    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "top",
+                                 data)
+    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "bottom",
+                                 data)
+    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "mid",
+                                 data)
+    data.minions.spawnMinionWave((7000 // 3, 200), (200, 200), "right", "top",
+                                 data)
+    data.minions.spawnMinionWave((7000 // 3, 200), (200, 200), "right",
+                                 "bottom", data)
+    data.minions.spawnMinionWave((7000 // 3, 200), (200, 200), "right", "mid",
+                                 data)
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
@@ -22,12 +33,13 @@ def init(data):
 
 def mouseDown(event, data):
     if (event.button == 3):
-        data.player.dest = [event.pos[0] + data.scrollX,\
+        data.player.dest = [event.pos[0] + data.scrollX, \
                             event.pos[1] + data.scrollY]
 
 
 def mouseUp(event, data):
     pass
+
 
 def keypress(data):
     keys = pygame.key.get_pressed()
