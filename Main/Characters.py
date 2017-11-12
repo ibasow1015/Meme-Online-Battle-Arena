@@ -6,7 +6,7 @@ import os
 class Player(pygame.sprite.Sprite):
 	def __init__(self, x, y, name):
 		pygame.sprite.Sprite.__init__(self)
-		self.dest = (x, y)
+		self.dest = [x, y]
 		self.gold = 200
 		self.animationState=0
 		self.animationDirection='right'
@@ -53,7 +53,7 @@ class Player(pygame.sprite.Sprite):
 				self.animationDirection='up'
 
 	def update(self):
-		self.move()
+		self.move(15)
 		self.animateWalk(self.animationDirection)
 
 	def setX(self, x):
@@ -62,8 +62,12 @@ class Player(pygame.sprite.Sprite):
 	def setY(self, y):
 		self.rect.y += y
 
-	def setDestination(self, x, y):
-		self.dest = (x, y)
+    def changeDestination(self, dx, dy):
+        self.dest[0] += dx
+        self.dest[1] += dy
+
+    def getDestination(self):
+        return self.dest
 
 class Test(Player):
 	def __init__(self, x, y, name):
