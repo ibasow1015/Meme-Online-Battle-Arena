@@ -86,8 +86,18 @@ import Mario
 import Bowser
 
 def initCharacter(data):
-    data.player = Bowser.Bowser(50, 50, 'Player1')
-    data.players.add(data.player)
+	data.player=None
+	while(data.player==None):
+		print('Select character:')
+		character=input('-->')
+		if(character=='mario'):
+			data.player=Mario.Mario(50,50,'Player1')
+			break
+		elif(character=='bowser'):
+			data.player=Bowser.Bowser(50,50,'Player1')
+			break
+		print('invalid input')
+	data.players.add(data.player)
 
 
 def drawCharacter(display, data):

@@ -78,6 +78,14 @@ class MarioAbility4Icon(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.rect.center=(x,y)
 
+class MarioAbility3Icon(pygame.sprite.Sprite):
+    def __init__(self,data,x,y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image=pygame.image.load(os.path.join('sprites/mario_mushroom.png'))
+        self.image=pygame.transform.scale(self.image,(int(data.width*.06),int(data.width*.06)))
+        self.rect=self.image.get_rect()
+        self.rect.center=(x,y)
+
 
 def initIcons(data):
     data.icons = pygame.sprite.Group()
@@ -102,10 +110,12 @@ def initIcons(data):
     damageIconX = data.width * .25
     damageIconY = data.height - data.width * .03
     data.icons.add(DamageIcon(data, damageIconX, damageIconY))
-    abilityIconY=data.height-data.width*.09
+    abilityIconY=data.height-data.width*.088
     ability4IconX=data.width*.56
+    ability3IconX=data.width*.487
     if(data.player.character=='Mario'):
         data.icons.add(MarioAbility4Icon(data,ability4IconX,abilityIconY))
+        data.icons.add(MarioAbility3Icon(data,ability3IconX,abilityIconY))
 
 
 def drawIcons(display, data):
