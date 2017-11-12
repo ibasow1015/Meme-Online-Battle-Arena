@@ -32,7 +32,7 @@ def drawItemSlots(display, data):
 def drawStats(display, data):
     boxX = data.width * .18
     boxY = data.height - data.width * .13
-    boxWidth = data.width * .12
+    boxWidth = data.width * .125
     boxHeight = data.width * .13
     pygame.draw.rect(display, (0, 0, 0), (boxX, boxY, boxWidth, boxHeight))
     armorLabel = data.font.render(str(data.player.armor), 1, (255, 255, 255))
@@ -59,7 +59,7 @@ def drawAbilitySlots(display, data):
     boxX = data.width * .3
     boxY = data.height - data.width * .13
     boxWidth = data.width * .3
-    boxHeight = data.height * .085
+    boxHeight = data.height -data.width* .085
     pygame.draw.rect(display, (0, 0, 0), (boxX, boxY, boxWidth, boxHeight))
     slotMargin = data.width * .0125
     slotWidth = data.width * .06
