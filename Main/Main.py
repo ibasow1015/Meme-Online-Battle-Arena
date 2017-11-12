@@ -17,22 +17,26 @@ def init(data):
     ChainChomp.initTowers(data)
     data.players = pygame.sprite.Group()
     Characters.initCharacter(data)
-    data.minions = Minions.Minions()
-    data.minions.spawnMinionWave((500, data.mapHeight * 7 / 8), (500, 500),
-                                 "left", "top", data)
-    data.minions.spawnMinionWave((data.mapWidth * 7 / 8, 500), (500, 500),
-                                 "right", "top", data)
-    data.minions.spawnMinionWave((6500, data.mapHeight * 1 / 10), (6500, 6500),
-                                 "right", "bottom", data)
-    data.minions.spawnMinionWave((data.mapWidth * 1 / 10, 6500), (6500, 6500),
-                                 "left", "bottom", data)
+    data.leftMinions = Minions.Minions()
+    data.rightMinions = Minions.Minions()
+    data.leftMinions.spawnMinionWave((500, data.mapHeight * 7 / 8), (500, 500),
+                                     "left", "top", data)
+    data.rightMinions.spawnMinionWave((data.mapWidth * 7 / 8, 500), (500, 500),
+                                      "right", "top", data)
+    data.rightMinions.spawnMinionWave((6500, data.mapHeight * 1 / 10),
+                                      (6500, 6500),
+                                      "right", "bottom", data)
+    data.leftMinions.spawnMinionWave((data.mapWidth * 1 / 10, 6500), (6500,
+                                                6500), "left", "bottom", data)
 
-    data.minions.spawnMinionWave(
-        (data.mapWidth * 7 / 8, data.mapHeight * 1 / 10),
-        (3500, 3500), "right", "mid", data)
-    data.minions.spawnMinionWave(
-        (data.mapWidth * 1 / 10, data.mapHeight * 7 / 8),
-        (3500, 3500), "left", "mid", data)
+    data.rightMinions.spawnMinionWave(
+        (data.mapWidth * 7 / 8, data.mapHeight * 1 / 10), (3500, 3500),
+        "right", "mid", data
+    )
+    data.leftMinions.spawnMinionWave(
+        (data.mapWidth * 1 / 10, data.mapHeight * 7 / 8), (3500, 3500),
+        "left", "mid", data
+    )
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
@@ -69,7 +73,8 @@ def keypress(data):
     if keys[pygame.K_d] and data.scrollX < data.mapWidth:
         x += 1
     drawMap.move(data, x, y)
-    data.minions.move(-x, -y, data)
+    data.leftMinions.move(-x, -y, data)
+    data.rightMinions.move(-x, -y, data)
 
 
 def keyDown(event, data):
@@ -95,7 +100,8 @@ def keyUp(event, data):
 
 def timerFired(data):
     data.timer += 250
-    data.minions.update(data.timer, data)
+    data.leftMinions.update(data.timer, data)
+    data.rightMinions.update(data.timer, data)
     pass
 
 
@@ -103,7 +109,8 @@ def redrawAll(display, data):
     drawMap.drawBoard(data, display)
     drawMap.drawMap(data, display)
     Characters.drawCharacter(display, data)
-    data.minions.drawMinions(display)
+    data.leftMinions.drawMinions(display)
+    data.rightMinions.drawMinions(display)
     UI.drawTaskbar(display, data)
     icons.drawIcons(display, data)
 

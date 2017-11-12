@@ -1,6 +1,6 @@
 from pygame import *
 import os
-
+import math
 
 class Minions(sprite.Group):
     def __init__(self):
@@ -25,6 +25,8 @@ class Minions(sprite.Group):
             for i in range(5):
                 x = i * 28 * (side == "left")
                 y = i * 28 * (side == "right")
+                self.add(Melee((position[0] + x, position[1] + y), destination,
+                               side, lane, data))
         if lane == "mid":
             for i in range(5):
                 x = y = i * 28
@@ -48,11 +50,30 @@ class Minion(sprite.Sprite):
         self.rect.center = startingPosition
         self.damageReduction = 0.1
         self.target = None
-        self.speed = data.unit * 2
         self.width = 30
         self.height = 30
         self.hitbox = 25
         Minion.minions.add(self)
+
+    def distance(self, other):
+        return math.sqrt((self.rect.x - other.rect.x) ** 2 + (self.rect.y -
+                                                        other.rect.y) ** 2)
+    def inRange(self, other):
+        return self.distance(other) <= self.range
+
+    def getTarget(self, data):
+        if self.side == "right" and self.target is None:
+            for target in data.leftMinions.sprites():
+                if self.inRange(target):
+                    self.destination = target.rect.center
+                    self.target = target
+        elif self.side == "left" and self.target is None:
+            for target in data.rightMinions.sprites():
+                if self.inRange(target):
+                    self.destination = target.rect.center
+                    self.target = target
+
+
 
     def getHealth(self):
         pass
@@ -64,29 +85,30 @@ class Minion(sprite.Sprite):
         pass
 
     def update(self, timer, data):
-
+        self.getTarget(data)
         if not timer % 1000:
             targetX = self.destination[1] - data.scrollY
             targetY = self.destination[1] - data.scrollX
-            if self.lane == "top":
-                if self.rect.x > targetY:
-                    self.rect.x -= 10
-                if self.rect.y > targetX:
-                    self.rect.y -= 10
-            if self.lane == "bottom":
-                if self.rect.x < targetY:
-                    self.rect.x += 10
-                if self.rect.y < targetX:
-                    self.rect.y += 10
-            if self.lane == "mid":
-                if self.rect.x > targetY:
-                    self.rect.x -= 20
-                if self.rect.y > targetX:
-                    self.rect.y -= 20
-                if self.rect.x < targetY:
-                    self.rect.x += 20
-                if self.rect.y < targetX:
-                    self.rect.y += 20
+            if self.target is None or self.distance(self.target) < self.autoRad:
+                if self.lane == "top":
+                    if self.rect.x > targetY:
+                        self.rect.x -= 10
+                    if self.rect.y > targetX:
+                        self.rect.y -= 10
+                if self.lane == "bottom":
+                    if self.rect.x < targetY:
+                        self.rect.x += 10
+                    if self.rect.y < targetX:
+                        self.rect.y += 10
+                if self.lane == "mid":
+                    if self.rect.x > targetY:
+                        self.rect.x -= 10
+                    if self.rect.y > targetX:
+                        self.rect.y -= 10
+                    if self.rect.x < targetY:
+                        self.rect.x += 10
+                    if self.rect.y < targetX:
+                        self.rect.y += 10
 
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
@@ -95,6 +117,8 @@ class Minion(sprite.Sprite):
     def getValue(self, cs):
         pass
 
+    def autoAttack(self, direction):
+        pass
 
 class Melee(Minion):
     def __init__(self, startingPosition, destination, side, lane, data):
@@ -116,7 +140,8 @@ class Melee(Minion):
         self.structureDamage = 60
         self.lastHit = 20
         self.assist = 10
-        self.range = data.unit * 5
+        self.range = 5
+        self.autoRad = self.range / 2
 
     def getHealth(self):
         return self.health
@@ -131,3 +156,6 @@ class Melee(Minion):
         if cs:
             return self.lastHit
         return self.assist
+
+    def autoAttack(self, direction):
+        
