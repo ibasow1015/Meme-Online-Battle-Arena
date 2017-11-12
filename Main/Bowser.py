@@ -84,7 +84,6 @@ class Bowser(Characters.Player):
 
 
 		if(self.fireRect.center[0] >= 1280 or self.fireRect.center[0] <= 0):
-			print('hi')
 			self.fireOn = 'off'
 
 
