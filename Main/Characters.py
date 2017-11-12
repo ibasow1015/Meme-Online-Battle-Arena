@@ -3,72 +3,167 @@ import math
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, data, pos, name):
-        pygame.sprite.Sprite.__init__(self)
-        x, y = pos
-        self.dest = [x, y]
-        self.gold = 200
-        self.pos = [x, y]
-        self.animationState = 0
-        self.animationDirection = 'right'
-        self.movementState = 'still'
+	def __init__(self, data, pos, name):
+		pygame.sprite.Sprite.__init__(self)
+		x, y = pos
+		self.dest = [x, y]
+		self.fireDest = [x, y]
+		self.gold = 200
+		self.pos = [x, y]
+		self.animationState = 0
+		self.animationDirection = 'right'
+		self.movementState = 'still'
+		self.name = name
+		self.fireOn = 'off'
+		self.fireState = 0
 
-    def move(self, data, epsilon=6):
-        # location command
-        destX, destY = self.dest[0], self.dest[1]
-        # current location
-        x, y = self.pos[0], self.pos[1]
-        dx = destX - x
-        dy = destY - y
-        xDir, yDir = 1, 1
-        if (dx < 0):
-            xDir = -1
-        if (dy < 0):
-            yDir = -1
-        if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
-            self.movementState = 'still'
-        elif (dy < epsilon and dy > -epsilon):
-            x += self.speed * xDir
-            if (xDir > 0):
-                self.animationDirection = 'right'
-            else:
-                self.animationDirection = 'left'
-        elif (dx < epsilon and dx > -epsilon):
-            y += self.speed * yDir
-            if (xDir > 0):
-                self.animationDirection = 'right'
-            else:
-                self.animationDirection = 'left'
+	def move(self, data, epsilon=6):
+		# location command
+		destX, destY = self.dest[0], self.dest[1]
+		fdestX, fdestY = self.fireDest[0], self.fireDest[1]
+		# current location
+		x, y = self.pos[0], self.pos[1]
+		fx, fy = self.fireRect.center[0], self.fireRect.center[1]
 
-        else:
-            theta = abs(math.atan(dy / dx))
-            # calculate unit vector
-            i = self.speed * math.cos(theta) * xDir
-            j = self.speed * math.sin(theta) * yDir
-            x += i
-            y += j
-            self.movementState = 'moving'
-            if (abs(i) > abs(j) or yDir == 1):
-                if (xDir > 0):
-                    self.animationDirection = 'right'
-                else:
-                    self.animationDirection = 'left'
-            else:
-                self.animationDirection = 'up'
+		dx = destX - x
+		dy = destY - y
+		fdx = fdestX - fx
+		fdy = fdestY - fy
 
-        self.rect.center = (x - data.scrollX, y - data.scrollY)
-        self.pos = [x, y]
+		xDir, yDir = 1, 1
+		fxDir, fyDir = 1,1
 
-    def update(self, data):
-        self.move(data)
-        self.animateWalk(self.animationDirection)
-        self.health += self.regen
-        self.energy += self.regen
-        if (self.energy > self.maxEnergy):
-            self.energy = self.maxEnergy
-        if (self.health > self.maxHealth):
-            self.health = self.maxHealth
-        self.abilityTimers()
+		if (dx < 0):
+			xDir = -1
+		if (dy < 0):
+			yDir = -1
+		if(fdx<0):
+			fxDir = -1
+		if(fdy<0):
+			fyDir = -1
+
+		if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
+			self.movementState = 'still'
+		elif (dy < epsilon and dy > -epsilon):
+			x += self.speed * xDir
+			if (xDir > 0):
+				self.animationDirection = 'right'
+			else:
+				self.animationDirection = 'left'
+		elif (dx < epsilon and dx > -epsilon):
+			y += self.speed * yDir
+			if (xDir > 0):
+				self.animationDirection = 'right'
+			else:
+				self.animationDirection = 'left'
+
+		else:
+			theta = abs(math.atan(dy / dx))
+			# calculate unit vector
+			i = self.speed * math.cos(theta) * xDir
+			j = self.speed * math.sin(theta) * yDir
+			x += i
+			y += j
+			self.movementState = 'moving'
+			if (abs(i) > abs(j) or yDir == 1):
+				if (xDir > 0):
+					self.animationDirection = 'right'
+				else:
+					self.animationDirection = 'left'
+			else:
+				self.animationDirection = 'up'
+
+		self.rect.center = (x - data.scrollX, y - data.scrollY)
+		self.pos = [x, y]
+
+		if (fdy < epsilon and fdy > -epsilon and fdx < epsilon and fdx >
+			-epsilon):
+			self.fireRect.center = (fx, fy)
+			self.fireOn = 'off'
+		elif (fdy < epsilon and fdy > -epsilon):
+			self.fireRect.center = (fx + self.speed * fxDir, fy)
+			if (fxDir > 0):
+				self.animationDirection = 'right'
+			else:
+				self.animationDirection = 'left'
+		elif (fdx < epsilon and fdx > -epsilon):
+			self.fireRect.center = (fx, fy + self.speed * fyDir)
+			if (fxDir > 0):
+				self.animationDirection = 'right'
+			else:
+				self.animationDirection = 'left'
+		else:
+			# get vector angle
+			theta = abs(math.atan(fdy / fdx))
+			# calculate unit vector
+			i = self.speed * math.cos(theta) * fxDir
+			j = self.speed * math.sin(theta) * fyDir
+			self.fireRect.center = (fx + i, fy + j)
+			self.movementState = 'moving'
+			if (abs(i) > abs(j) or fyDir == 1):
+				if (fxDir > 0):
+					self.animationDirection = 'right'
+				else:
+					self.animationDirection = 'left'
+			else:
+				self.animationDirection = 'up'
+
+	def drawFire(self, display):
+		self.ability3Move()
+
+		x, y = self.fireRect[0], self.fireRect[1]
+
+		display.blit(self.fireImage, (x, y))
+
+	def update(self, display, data):
+		if (self.fireOn == 'on'):
+			self.drawFire(display)
+
+		self.move(data)
+		self.animateWalk(self.animationDirection)
+		self.health += self.regen
+		self.energy += self.regen
+		if (self.energy > self.maxEnergy):
+			self.energy = self.maxEnergy
+		if (self.health > self.maxHealth):
+			self.health = self.maxHealth
+		self.abilityTimers()
+		self.drawStatusBars(display, data)
+
+	def drawStatusBars(self, display, data):
+
+		boxX = self.rect.x - 10
+		HealthboxY = self.rect.y - 20
+		EnergyboxY = self.rect.y - 10
+		boxWidth = self.rect.width + 20
+		healthBoxHeight = 10
+		energyBoxHeight = 5
+
+		nameLabel = data.font.render(self.name, 1, (255, 255, 255))
+		display.blit(nameLabel, (self.rect.x - 2, HealthboxY - 17))
+
+		pygame.draw.rect(display, (255, 0, 0),
+		                 (boxX, HealthboxY, boxWidth, healthBoxHeight))
+		healthPercentage = data.player.health / data.player.maxHealth
+		pygame.draw.rect(display, (0, 255, 0),
+		                 (boxX, HealthboxY, boxWidth * healthPercentage,
+		                  healthBoxHeight))
+		for i in range(data.player.maxHealth // 100):
+			x = boxX + (boxWidth / (data.player.maxHealth / 100)) * (i + 1)
+			pygame.draw.line(display, (0, 0, 0), (x, HealthboxY),
+			                 (x, HealthboxY + healthBoxHeight))
+
+		pygame.draw.rect(display, (255, 0, 0),
+		                 (boxX, EnergyboxY, boxWidth, energyBoxHeight))
+		energyPercentage = data.player.energy / data.player.maxEnergy
+		pygame.draw.rect(display, (255, 255, 0),
+		                 (boxX, EnergyboxY, boxWidth * energyPercentage,
+		                  energyBoxHeight))
+
+		for i in range(data.player.maxEnergy // 100):
+			x = boxX + (boxWidth / (data.player.maxEnergy / 100)) * (i + 1)
+			pygame.draw.line(display, (0, 0, 0), (x, EnergyboxY),
+			                 (x, EnergyboxY + energyBoxHeight))
 
 
 import Mario
@@ -76,20 +171,20 @@ import Bowser
 
 
 def initCharacter(data):
-    data.player = None
-    while (data.player == None):
-        print('Select character:')
-        character = input('-->').lower()
-        if (character == 'mario'):
-            data.player = Mario.Mario(data, (50, 50), 'Player1')
-            break
-        elif (character == 'bowser'):
-            data.player = Bowser.Bowser(data, (50, 50), 'Player1')
-            break
-        print('invalid input')
-    data.players.add(data.player)
+	data.player = None
+	while (data.player == None):
+		print('Select character:')
+		character = input('-->').lower()
+		if (character == 'mario'):
+			data.player = Mario.Mario(data, (50, 50), 'Player1')
+			break
+		elif (character == 'bowser'):
+			data.player = Bowser.Bowser(data, (50, 50), 'Player1')
+			break
+		print('invalid input')
+	data.players.add(data.player)
 
 
 def drawCharacter(display, data):
-    data.players.update(data)
-    data.players.draw(display)
+	data.players.update(display, data)
+	data.players.draw(display)

@@ -1,10 +1,12 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import *
 import Characters
 import UI
 import icons
 import Minions
 import drawMap
+import ChainChomp
 
 
 def init(data):
@@ -14,27 +16,49 @@ def init(data):
     data.minions = Minions.Minions()
     data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "top",
                                  data)
-    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "bottom",
-                                 data)
-    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "mid",
-                                 data)
     data.minions.spawnMinionWave((7000 // 3, 200), (200, 200), "right", "top",
-                                 data)
-    data.minions.spawnMinionWave((7000 // 3, 200), (200, 200), "right",
-                                 "bottom", data)
-    data.minions.spawnMinionWave((7000 // 3, 200), (200, 200), "right", "mid",
                                  data)
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
     data.minionNum = 1
     data.mapStep = 50
+    data.towers = pygame.sprite.Group()
 
 
 def mouseDown(event, data):
     if (event.button == 3):
         data.player.dest = [event.pos[0] + data.scrollX, \
                             event.pos[1] + data.scrollY]
+        data.mapWidth = 7000
+        data.mapHeight = 7000
+        data.unit = data.width / 100
+        data.towers = pygame.sprite.Group()
+        ChainChomp.initTowers(data)
+        data.players = pygame.sprite.Group()
+        Characters.initCharacter(data)
+        data.minions = Minions.Minions()
+        data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
+        data.timer = 0
+        icons.initIcons(data)
+        data.scrollX = data.scrollY = 0
+        data.minionNum = 1
+        data.mapStep = 50
+        data.fireOn = 'off'
+
+
+def mouseDown(event, data):
+    if (event.button == 3 and data.fireOn == 'off'):
+        data.player.dest = [event.pos[0] + data.scrollX, \
+                            event.pos[1] + data.scrollY]
+
+    if (event.button == 3 and data.fireOn == 'on'):
+        data.player.fireDest = list(event.pos)
+        print(data.player.fireDest)
+        if (data.player.getName() == 'Bowser'):
+            if (data.player.fireOn == 'off'):
+                data.player.ability3()
+        data.fireOn = 'off'
 
 
 def mouseUp(event, data):
@@ -66,7 +90,11 @@ def keyDown(event, data):
     if (event.unicode == '2'):
         data.player.ability2()
     if (event.unicode == '3'):
-        data.player.ability3()
+        if (data.player.getName() == 'Bowser'):
+            print('hi')
+            data.fireOn = 'on'
+        else:
+            data.player.ability3()
     if (event.unicode == '4'):
         data.player.ability4()
 
@@ -87,6 +115,7 @@ def redrawAll(display, data):
     drawMap.drawMap(data, display)
     Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
+    ChainChomp.updateTowers(display, data)
     UI.drawTaskbar(display, data)
     icons.drawIcons(display, data)
 
