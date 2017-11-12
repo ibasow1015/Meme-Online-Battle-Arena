@@ -32,7 +32,7 @@ def keyDown(event, data):
     print(event.key)
 
     # print(data.scrollX)
-    if (event.key == 119 and data.scrollX > -200):
+    if (event.key == 119 and data.scrollY > -200):
         drawMap.move(data, 0, -1)
         data.player.setY(data.mapStep)
         data.player.setDestination(*data.player.getCenter())
