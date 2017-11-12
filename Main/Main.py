@@ -9,6 +9,7 @@ import ChainChomp
 
 
 def init(data):
+<<<<<<< HEAD
 	data.mapWidth = 7000
 	data.mapHeight = 7000
 	data.unit = data.width / 100
@@ -17,11 +18,11 @@ def init(data):
 	data.players = pygame.sprite.Group()
 	Characters.initCharacter(data)
 	data.minions = Minions.Minions()
-	data.minion = Minions.Minion((100, 30), data)
-	data.minions.add(data.minion)
+	data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
 	data.timer = 0
 	icons.initIcons(data)
 	data.scrollX = data.scrollY = 0
+	data.minionNum = 1
 	data.mapStep = 50
 
 
@@ -37,15 +38,16 @@ def mouseUp(event, data):
 def keypress(data):
     keys = pygame.key.get_pressed()
     x, y = 0, 0
-    if keys[pygame.K_w] and data.scrollY > 0:
+    if keys[pygame.K_w] and data.scrollY > -200:
         y += -1
     if keys[pygame.K_s] and data.scrollY < data.mapHeight:
         y += 1
-    if keys[pygame.K_a] and data.scrollX > 0:
+    if keys[pygame.K_a] and data.scrollX > -200:
         x += -1
     if keys[pygame.K_d] and data.scrollX < data.mapWidth:
         x += 1
     drawMap.move(data, x, y)
+    data.minions.move(-x, -y, data)
 
 
 def keyDown(event, data):

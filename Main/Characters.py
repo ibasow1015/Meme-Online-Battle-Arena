@@ -1,6 +1,5 @@
 import pygame
 import math
-import os
 
 
 class Player(pygame.sprite.Sprite):
@@ -29,13 +28,13 @@ class Player(pygame.sprite.Sprite):
         if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
             self.movementState = 'still'
         elif (dy < epsilon and dy > -epsilon):
-            x += self.speed*xDir
+            x += self.speed * xDir
             if (xDir > 0):
                 self.animationDirection = 'right'
             else:
                 self.animationDirection = 'left'
         elif (dx < epsilon and dx > -epsilon):
-            y += self.speed*yDir
+            y += self.speed * yDir
             if (xDir > 0):
                 self.animationDirection = 'right'
             else:
@@ -60,7 +59,6 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (x - data.scrollX, y - data.scrollY)
         self.pos = [x, y]
 
-
     def update(self, data):
         self.move(data)
         self.animateWalk(self.animationDirection)
@@ -73,37 +71,23 @@ class Player(pygame.sprite.Sprite):
         self.abilityTimers()
 
 
-    def setX(self, x):
-        self.rect.x += x
-
-    def setY(self, y):
-        self.rect.y += y
-
-    def changeDestination(self, dx, dy):
-        self.dest[0] += dx
-        self.dest[1] += dy
-
-    def getDestination(self):
-        return self.dest
-
-
 import Mario
 import Bowser
 
 
 def initCharacter(data):
-	data.player=None
-	while(data.player==None):
-		print('Select character:')
-		character=input('-->').lower()
-		if(character=='mario'):
-			data.player=Mario.Mario(data,(50,50),'Player1')
-			break
-		elif(character=='bowser'):
-			data.player=Bowser.Bowser(data,(50,50),'Player1')
-			break
-		print('invalid input')
-	data.players.add(data.player)
+    data.player = None
+    while (data.player == None):
+        print('Select character:')
+        character = input('-->').lower()
+        if (character == 'mario'):
+            data.player = Mario.Mario(data, (50, 50), 'Player1')
+            break
+        elif (character == 'bowser'):
+            data.player = Bowser.Bowser(data, (50, 50), 'Player1')
+            break
+        print('invalid input')
+    data.players.add(data.player)
 
 
 def drawCharacter(display, data):
