@@ -31,11 +31,17 @@ class Player(pygame.sprite.Sprite):
 		    self.rect.center = (x, y)
 		    self.movementState='still'
 		elif (dy < epsilon and dy > -epsilon):
-		    self.rect.center = (x + self.speed * xDir, y)
-		    self.movementState='still'
+			self.rect.center = (x + self.speed * xDir, y)
+			if(xDir>0):
+				self.animationDirection='right'
+			else:
+				self.animationDirection='left'
 		elif (dx < epsilon and dx > -epsilon):
-		    self.rect.center = (x, y + self.speed * yDir)
-		    self.movementState='still'
+			self.rect.center = (x, y + self.speed * yDir)
+			if(xDir>0):
+					self.animationDirection='right'
+			else:
+				self.animationDirection='left'
 		else:
 			# get vector angle
 			theta = abs(math.atan(dy / dx))
@@ -62,12 +68,12 @@ class Player(pygame.sprite.Sprite):
 	def setY(self, y):
 		self.rect.y += y
 
-    def changeDestination(self, dx, dy):
-        self.dest[0] += dx
-        self.dest[1] += dy
+	def changeDestination(self, dx, dy):
+		self.dest[0] += dx
+		self.dest[1] += dy
 
-    def getDestination(self):
-        return self.dest
+	def getDestination(self):
+		return self.dest
 
 class Test(Player):
 	def __init__(self, x, y, name):
