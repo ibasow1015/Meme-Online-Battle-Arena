@@ -27,10 +27,12 @@ def init(data):
     data.minions.spawnMinionWave((data.mapWidth * 1 / 10, 6500), (6500, 6500),
                                  "left", "bottom", data)
 
-    data.minions.spawnMinionWave((data.mapWidth * 7/8, 6500), (3600, 3600),
-                                 "right", "mid", data)
-    data.minions.spawnMinionWave((6500, data.mapHeight * 7/8), (3600, 3600),
-                                 "left", "mid", data)
+    data.minions.spawnMinionWave(
+        (data.mapWidth * 7 / 8, data.mapHeight * 1 / 10),
+        (3500, 3500), "right", "mid", data)
+    data.minions.spawnMinionWave(
+        (data.mapWidth * 1 / 10, data.mapHeight * 7 / 8),
+        (3500, 3500), "left", "mid", data)
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
@@ -40,7 +42,7 @@ def init(data):
 
 def mouseDown(event, data):
     if (event.button == 3 and data.fireOn == 'off'):
-        data.player.dest = [event.pos[0] + data.scrollX, \
+        data.player.dest = [event.pos[0] + data.scrollX,
                             event.pos[1] + data.scrollY]
 
     if (event.button == 3 and data.fireOn == 'on'):
@@ -107,70 +109,70 @@ def redrawAll(display, data):
 
 
 def run(width=300, height=300):
-	def redrawAllWrapper(display, data):
-	    display.fill((255, 255, 255))
-	    redrawAll(display, data)
-	    pygame.display.update()
+    def redrawAllWrapper(display, data):
+        display.fill((255, 255, 255))
+        redrawAll(display, data)
+        pygame.display.update()
 
-	def mouseDownWrapper(event, display, data):
-	    mouseDown(event, data)
-	    redrawAllWrapper(display, data)
+    def mouseDownWrapper(event, display, data):
+        mouseDown(event, data)
+        redrawAllWrapper(display, data)
 
-	def mouseUpWrapper(event, display, data):
-	    mouseUp(event, data)
-	    redrawAllWrapper(display, data)
+    def mouseUpWrapper(event, display, data):
+        mouseUp(event, data)
+        redrawAllWrapper(display, data)
 
-	def keyDownWrapper(event, display, data):
-	    keyDown(event, data)
-	    redrawAllWrapper(display, data)
+    def keyDownWrapper(event, display, data):
+        keyDown(event, data)
+        redrawAllWrapper(display, data)
 
-	def keyUpWrapper(event, display, data):
-	    keyUp(event, data)
-	    redrawAllWrapper(display, data)
+    def keyUpWrapper(event, display, data):
+        keyUp(event, data)
+        redrawAllWrapper(display, data)
 
-	def quit():
-	    pygame.quit()
-	    sys.exit()
+    def quit():
+        pygame.quit()
+        sys.exit()
 
-	def timerFiredWrapper(display, data):
-	    timerFired(data)
-	    redrawAllWrapper(display, data)
-	    data.fpsClock.tick(data.fps)
+    def timerFiredWrapper(display, data):
+        timerFired(data)
+        redrawAllWrapper(display, data)
+        data.fpsClock.tick(data.fps)
 
-	# Set up data and call init
-	class Struct(object):
-	    pass
+    # Set up data and call init
+    class Struct(object):
+        pass
 
-	data = Struct()
-	data.width = width
-	data.height = height
-	data.fps = 30  # frames per second
-	data.fpsClock = pygame.time.Clock()
-	init(data)
+    data = Struct()
+    data.width = width
+    data.height = height
+    data.fps = 30  # frames per second
+    data.fpsClock = pygame.time.Clock()
+    init(data)
 
-	# initialize module and display
-	pygame.init()
-	data.font = pygame.font.SysFont("helvetica", 15)
-	display = pygame.display.set_mode((data.width, data.height))
-	pygame.display.set_caption('RTS')
+    # initialize module and display
+    pygame.init()
+    data.font = pygame.font.SysFont("helvetica", 15)
+    display = pygame.display.set_mode((data.width, data.height))
+    pygame.display.set_caption('RTS')
 
-	# main loop
-	while (True):
-		for event in pygame.event.get():
-		    if (event.type == QUIT):
-		        quit()
-		    if (event.type == KEYDOWN):
-		        keyDownWrapper(event, display, data)
-		    if (event.type == KEYUP):
-		        keyUpWrapper(event, display, data)
-		    if (event.type == MOUSEBUTTONDOWN):
-		        mouseDownWrapper(event, display, data)
-		    if (event.type == MOUSEBUTTONUP):
-		        mouseUpWrapper(event, display, data)
+    # main loop
+    while (True):
+        for event in pygame.event.get():
+            if (event.type == QUIT):
+                quit()
+            if (event.type == KEYDOWN):
+                keyDownWrapper(event, display, data)
+            if (event.type == KEYUP):
+                keyUpWrapper(event, display, data)
+            if (event.type == MOUSEBUTTONDOWN):
+                mouseDownWrapper(event, display, data)
+            if (event.type == MOUSEBUTTONUP):
+                mouseUpWrapper(event, display, data)
 
-		keypress(data)
+        keypress(data)
 
-		timerFiredWrapper(display, data)
+        timerFiredWrapper(display, data)
 
 
 run(1280, 720)
