@@ -49,12 +49,6 @@ class Player(pygame.sprite.Sprite):
     def setDestination(self, x, y):
         self.dest = (x, y)
 
-
-class Warrior(Player):
-    def __init__(self, x, y, name):
-        Player.__init__(self, x, y, name)
-
-
 class Test(Player):
     def __init__(self, x, y, name):
         Player.__init__(self, x, y, name)
@@ -95,7 +89,6 @@ class Test(Player):
 def initCharacter(data):
     data.player = Test(50, 50, 'Player1')
     data.players.add(data.player)
-
 
 def drawCharacter(display, data):
     data.players.update()

@@ -32,25 +32,25 @@ def keyDown(event, data):
     print(event.key)
 
     # print(data.scrollX)
-    if (event.key == 119):
+    if (event.key == 119 and data.scrollX > -200):
         drawMap.move(data, 0, -1)
         data.player.setY(data.mapStep)
         data.player.setDestination(*data.player.getCenter())
         for minion in data.minions.sprites():
             minion.setY(data.mapStep)
-    elif (event.key == 115):
+    elif (event.key == 115 and data.scrollY < 7200):
         drawMap.move(data, 0, 1)
         data.player.setY(-data.mapStep)
         data.player.setDestination(*data.player.getCenter())
         for minion in data.minions.sprites():
             minion.setY(-data.mapStep)
-    elif (event.key == 97):
+    elif (event.key == 97 and data.scrollX > -200):
         drawMap.move(data, -1, 0)
         data.player.setX(data.mapStep)
         data.player.setDestination(*data.player.getCenter())
         for minion in data.minions.sprites():
             minion.setX(data.mapStep)
-    elif (event.key == 100):
+    elif (event.key == 100 and data.scrollX < 7200):
         drawMap.move(data, 1, 0)
         data.player.setX(-data.mapStep)
         data.player.setDestination(*data.player.getCenter())
@@ -64,7 +64,8 @@ def keyDown(event, data):
 
 
 def keyUp(event, data):
-    pass
+    if (event.key == 273):
+        data.downPressed = False
 
 
 def timerFired(data):
