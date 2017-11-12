@@ -82,26 +82,27 @@ def drawMap(data, display):
 											   height // 4 - towerRad // 2 - sy,
 											   towerRad * 2, towerRad))
 
-
 def move(data, x, y):
-	# x, y is either 0 or 1 or -1
-	data.scrollX += x * data.mapStep
-	data.scrollY += y * data.mapStep
+    # x, y is either 0 or 1 or -1
+    data.scrollX += x * data.mapStep
+    data.scrollY += y * data.mapStep
+
 
 class backGround(pygame.sprite.Sprite):
-	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.transform.scale(pygame.image.load(
-			'sprites/grass.png'), (1000, 1000))
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.transform.scale(pygame.image.load(
+            'sprites/grass.png'
+            ''), (1000, 1000))
+
 
 def drawBoard(self, display):
-	backGround.__init__(self)
+    backGround.__init__(self)
 
-	sx = self.scrollX
-	sy = self.scrollY
+    sx = self.scrollX
+    sy = self.scrollY
 
-	for i in range(7):
-		for j in range(7):
-			display.blit(self.image,
-						 (0 - sx + 1000 * i, 0 - sy + 1000 * j, 1000, 1000))
-
+    for i in range(7):
+        for j in range(7):
+            display.blit(self.image,
+                         (0 - sx + 1000 * i, 0 - sy + 1000 * j, 1000, 1000))
