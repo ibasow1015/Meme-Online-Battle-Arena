@@ -33,10 +33,10 @@ def drawMap(data, display):
 
 
 	# Draws bases
-	pygame.draw.ellipse(display, (0, 0, 0), (0 - baseRad - sx,
+	pygame.draw.ellipse(display, (153, 50, 204), (0 - baseRad - sx,
 											 height - baseRad // 2 - sy,
 											 baseRad * 2, baseRad))
-	pygame.draw.ellipse(display, (0, 0, 0), (width - baseRad - sx,
+	pygame.draw.ellipse(display, (153, 50, 204), (width - baseRad - sx,
 											 0 - baseRad // 2 - sy, baseRad * 2,
 											 baseRad))
 
