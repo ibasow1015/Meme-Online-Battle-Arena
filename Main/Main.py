@@ -5,35 +5,45 @@ import UI
 import icons
 import Minions
 import drawMap
-
+import ChainChomp
 
 
 def init(data):
-	data.backGround=drawMap.backGround()
-	data.mapWidth = 7000
-	data.mapHeight = 7000
-	data.unit = data.width / 100
-	data.towers=pygame.sprite.Group()
-	ChainChomp.initTowers(data)
-	data.players = pygame.sprite.Group()
-	Characters.initCharacter(data)
-	data.minions = Minions.Minions()
-	data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
-	data.timer = 0
-	icons.initIcons(data)
-	data.scrollX = data.scrollY = 0
-	data.minionNum = 1
-	data.mapStep = 50
+    data.backGround = drawMap.backGround()
+    data.mapWidth = 7000
+    data.mapHeight = 7000
+    data.unit = data.width / 100
+    data.towers = pygame.sprite.Group()
+    ChainChomp.initTowers(data)
+    data.players = pygame.sprite.Group()
+    Characters.initCharacter(data)
+    data.minions = Minions.Minions()
+    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "top",
+                                 data)
+    data.timer = 0
+    icons.initIcons(data)
+    data.scrollX = data.scrollY = 0
+    data.minionNum = 1
+    data.fireOn = "off"
+    data.mapStep = 50
 
 
 def mouseDown(event, data):
-    if (event.button == 3):
-        data.player.dest = [event.pos[0] + data.scrollX,\
+    if (event.button == 3 and data.fireOn == 'off'):
+        data.player.dest = [event.pos[0] + data.scrollX, \
                             event.pos[1] + data.scrollY]
+
+    if (event.button == 3 and data.fireOn == 'on'):
+        data.player.fireDest = list(event.pos)
+        if data.player.getName() == "bowser":
+            if data.player.fireOn == 'off':
+                data.player.ability3()
+        data.fireOn = "off"
 
 
 def mouseUp(event, data):
     pass
+
 
 def keypress(data):
     keys = pygame.key.get_pressed()
@@ -60,6 +70,7 @@ def keyDown(event, data):
     if (event.unicode == '2'):
         data.player.ability2()
     if (event.unicode == '3'):
+        data.fireOn = "on" if data.player.getName() == "Bowser" else data.fireOn
         data.player.ability3()
     if (event.unicode == '4'):
         data.player.ability4()

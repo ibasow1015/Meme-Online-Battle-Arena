@@ -1,4 +1,5 @@
 from pygame import *
+import pygame
 import os
 
 
@@ -16,32 +17,17 @@ class Minions(sprite.Group):
 
     def spawnMinionWave(self, position, destination, side, lane, data):
         if lane == "top":
-            if side == "left":
-                self.add(Melee((position[0], position[1] + 5 * 28), destination,
-                               side, lane, data, 0))
-                self.add(Melee((position[0], position[1] + 4 * 28), destination,
-                               side, lane, data, 0))
-                self.add(Melee((position[0], position[1] + 3 * 28), destination,
-                               side, lane, data, 0))
-                self.add(Melee((position[0], position[1] + 2 * 28), destination,
-                               side, lane, data, 0))
-                self.add(Melee((position[0], position[1] + 1 * 28), destination,
-                               side, lane, data, 0))
-                self.add(Melee((position[0], position[1] + 0 * 28), destination,
-                               side, lane, data, 0))
-            else:
-                self.add(Melee((position[0] - 5 * 28, position[1]),
-                               destination, side, lane, data, 0))
-                self.add(Melee((position[0] - 4 * 28, position[1]), destination,
-                               side, lane, data, 1))
-                self.add(Melee((position[0] - 3 * 28, position[1]),
-                               destination, side, lane, data, 2))
-                self.add(Melee((position[0] - 2 * 28, position[1]),
-                               destination, side, lane, data, 3))
-                self.add(Melee((position[0] - 1 * 28, position[1]),
-                               destination, side, lane, data, 4))
-                self.add(Melee((position[0] - 0 * 28, position[1]),
-                               destination, side, lane, data, 5))
+            for i in range(5):
+                x = i * 28 * (side == "right")
+                y = i * 28 * (side == "left")
+                self.add(Melee((position[0] + x, position[1] + y), destination,
+                               side, lane, data))
+        if lane == "bottom":
+            for i in range(5):
+                x = i * 28 * (side == "left")
+                y = i * 28 * (side == "right")
+                self.add(Melee((position[0] + x, position[1] + y),
+                               destination, side, lane, data))
 
     def move(self, x, y, data):
         for minion in self.sprites():
@@ -76,12 +62,10 @@ class Minion(sprite.Sprite):
         if not timer % 1000:
             minY = self.destination[1] - data.scrollY
             minX = self.destination[1] - data.scrollX
-            if self.rect.x > minX:
+            if self.rect.x < minX:
                 self.rect.x -= 6
             if self.rect.y > minY:
                 self.rect.y -= 6
-
-
 
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
@@ -92,8 +76,7 @@ class Minion(sprite.Sprite):
 
 
 class Melee(Minion):
-    def __init__(self, startingPosition, destination, side, lane, data,
-                 position):
+    def __init__(self, startingPosition, destination, side, lane, data):
         self.side = side
         self.lane = lane
         if lane == "top":
@@ -112,7 +95,6 @@ class Melee(Minion):
         self.structureDamage = 60
         self.lastHit = 20
         self.assist = 10
-        self.position = position
         self.range = data.unit * 5
 
     def getHealth(self):
