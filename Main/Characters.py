@@ -204,6 +204,7 @@ class Test(Player):
                         os.path.join('sprites/mario_r4.png'))
                     self.image = pygame.transform.scale(self.image, (
                     self.width, self.height))
+
         if (direction == 'left'):
             if (self.movementState == 'still'):
                 self.image = pygame.image.load(
