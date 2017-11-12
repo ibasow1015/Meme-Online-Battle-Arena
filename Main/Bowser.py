@@ -14,7 +14,7 @@ class Bowser(Characters.Player):
 		self.x = x
 		self.y = y
 
-
+		#i hate github
 
 		self.width=50
 		self.height=50
