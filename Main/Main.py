@@ -8,7 +8,6 @@ import Minions
 import drawMap
 import ChainChomp
 
-
 def init(data):
     data.unit = data.width / 100
     data.players = pygame.sprite.Group()
@@ -24,27 +23,25 @@ def init(data):
     data.minionNum = 1
     data.mapStep = 50
     data.towers = pygame.sprite.Group()
+    data.mapWidth = 7000
+    data.mapHeight = 7000
+    data.offset = data.scrollX, data.scrollY
+    data.map = drawMap.Map(data, data.mapWidth, data.mapHeight, data.offset)
+    data.minimap = drawMap.Map(data, data.mapWidth/20, data.mapHeight/20, (0,0))
+    data.towers = pygame.sprite.Group()
+    ChainChomp.initTowers(data)
+    data.players = pygame.sprite.Group()
+    Characters.initCharacter(data)
+    data.minions = Minions.Minions()
+    icons.initIcons(data)
+    data.mapStep = 50
+    data.fireOn = 'off'
 
 
 def mouseDown(event, data):
     if (event.button == 3):
         data.player.dest = [event.pos[0] + data.scrollX, \
                             event.pos[1] + data.scrollY]
-        data.mapWidth = 7000
-        data.mapHeight = 7000
-        data.unit = data.width / 100
-        data.towers = pygame.sprite.Group()
-        ChainChomp.initTowers(data)
-        data.players = pygame.sprite.Group()
-        Characters.initCharacter(data)
-        data.minions = Minions.Minions()
-        data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
-        data.timer = 0
-        icons.initIcons(data)
-        data.scrollX = data.scrollY = 0
-        data.minionNum = 1
-        data.mapStep = 50
-        data.fireOn = 'off'
 
 
 def mouseDown(event, data):
@@ -111,14 +108,12 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
-    drawMap.drawBoard(data, display)
-    drawMap.drawMap(data, display)
+    data.map.drawMap(display)
     Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
-    ChainChomp.updateTowers(display, data)
+    ChainChomp.updateTowers(display,data)
     UI.drawTaskbar(display, data)
     icons.drawIcons(display, data)
-
 
 def run(width=300, height=300):
     def redrawAllWrapper(display, data):
@@ -185,6 +180,7 @@ def run(width=300, height=300):
         keypress(data)
 
         timerFiredWrapper(display, data)
+
 
 
 run(1280, 720)

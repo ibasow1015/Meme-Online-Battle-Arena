@@ -1,7 +1,9 @@
 import pygame
+import drawMap
 
 
 def drawTaskbar(display, data):
+    #drawMinimap(display, data)
     drawStats(display, data)
     drawItemSlots(display, data)
     drawAbilitySlots(display, data)
@@ -91,3 +93,8 @@ def drawResourceBars(display, data):
     pygame.draw.rect(display, (255, 255, 0),
                      (boxX, EnergyboxY, boxWidth * energyPercentage, boxHeight))
     display.blit(energyLabel,(data.width*.42,data.height-data.width*.025))
+
+
+def drawMinimap(display, data):
+    print(data.minimap.width)
+    data.minimap.drawMap(display)

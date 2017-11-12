@@ -1,4 +1,5 @@
 from pygame import *
+import pygame
 import os
 
 
@@ -59,12 +60,14 @@ class Minion(sprite.Sprite):
 
     def update(self, timer, data):
         if not timer % 1000:
+            print("Hi")
             minY = self.destination[1] - data.scrollY
             minX = self.destination[1] - data.scrollX
             if self.rect.x < minX:
                 self.rect.x -= 6
             if self.rect.y > minY:
                 self.rect.y -= 6
+
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
         self.rect.y += y * data.mapStep
