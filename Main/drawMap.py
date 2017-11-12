@@ -21,7 +21,7 @@ class Map(object):
 
 		self.imgwidth = data.mapWidth//7
 		self.imgheight = data.mapHeight//7
-		self.background = Background()
+		self.background = backGround()
 
 		# Draw the whole map
 
@@ -103,7 +103,7 @@ def move(data, x, y):
   data.scrollY += y * data.mapStep
 
 
-class Background(pygame.sprite.Sprite):
+class backGround(pygame.sprite.Sprite):
   def __init__(self):
       pygame.sprite.Sprite.__init__(self)
       self.road_h=pygame.image.load(os.path.join('sprites/grass_road_h.png'))
