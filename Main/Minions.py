@@ -15,23 +15,31 @@ class Minions(sprite.Group):
     def drawMinions(self, gameMap):
         self.draw(gameMap)
 
-    def spawnMinionWave(self, position, side, lane, data):
-        self.add(Melee((position[0], position[1] + 5 * 28), side, lane, data))
-        self.add(Melee((position[0], position[1] + 4 * 28), side, lane, data))
-        self.add(Melee((position[0], position[1] + 3 * 28), side, lane, data))
-        self.add(Melee((position[0], position[1] + 2 * 28), side, lane, data))
-        self.add(Melee((position[0], position[1] + 1 * 28), side, lane, data))
-        self.add(Melee((position[0], position[1] + 0 * 28), side, lane, data))
+    def spawnMinionWave(self, position, destination, side, lane, data):
+        if lane == "top":
+            for i in range(5):
+                x = i * 28 * (side == "left")
+                y = i * 28 * (side == "right")
+                self.add(Melee((position[0] + x, position[1] + y), destination,
+                               side, lane, data))
+        if lane == "bottom":
+            for i in range(5):
+                x = i * 28 * (side == "right")
+                y = i * 28 * (side == "left")
+                self.add(Melee((position[0] + x, position[1] + y),
+                               destination, side, lane, data))
 
     def move(self, x, y, data):
         for minion in self.sprites():
             minion.setCenter(x, y, data)
 
+
 class Minion(sprite.Sprite):
     minions = Minions()
 
-    def __init__(self, startingPosition, data):
+    def __init__(self, startingPosition, destination, data):
         super(Minion, self).__init__()
+        self.destination = destination
         self.rect = self.image.get_rect()
         self.rect.center = startingPosition
         self.damageReduction = 0.1
@@ -52,39 +60,36 @@ class Minion(sprite.Sprite):
 
     def update(self, timer, data):
         if not timer % 1000:
-            if self.side == "left":
-                if self.lane == "top":
-                    if self.rect.y > 200 - data.scrollY:
-                        self.rect.y -= 6
-                    if self.rect.y < 200 - data.scrollY:
-                        self.rect.y = 200 - data.scrollY
-                    if self.rect.x < 5000 + data.scrollX and self.rect.y <= \
-                            200 - data.scrollY:
-                        self.direction = "right"
-                        self.image = image.load(
-                            os.path.join('sprites/Koopa/move %s.png' % (
-                                self.direction)))
-                        self.image = transform.scale(self.image,
-                                                     (self.width, self.height))
-                        self.rect.x += 6
-                        
+            print("Hi")
+            minY = self.destination[1] - data.scrollY
+            minX = self.destination[1] - data.scrollX
+            if self.rect.x < minX:
+                self.rect.x -= 6
+            if self.rect.y > minY:
+                self.rect.y -= 6
+
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
         self.rect.y += y * data.mapStep
+
     def getValue(self, cs):
         pass
 
 
 class Melee(Minion):
-    def __init__(self, startingPosition, data, side, lane):
+    def __init__(self, startingPosition, destination, side, lane, data):
         self.side = side
         self.lane = lane
-        if side == "left":
-            if lane == "top":
-                self.direction = "up"
-        self.image = image.load(os.path.join('sprites/Koopa/move %s.png' %(
+        if lane == "top":
+            self.direction = "up" if self.side == "left" else "left"
+        if lane == "mid":
+            self.direction = "left" if self.side == "right" else "right"
+        if lane == "bottom":
+            self.direction = "down" if self.side == "right" else "right"
+
+        self.image = image.load(os.path.join('sprites/Koopa/move %s.png' % (
             self.direction)))
-        super(Melee, self).__init__(startingPosition, data)
+        super(Melee, self).__init__(startingPosition, destination, data)
         self.image = transform.scale(self.image, (self.width, self.height))
         self.health = 350
         self.damage = 15
