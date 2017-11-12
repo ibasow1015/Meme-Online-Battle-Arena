@@ -31,7 +31,7 @@ def mouseUp(event, data):
 
 
 def keyDown(event, data):
-	print(event.key)
+	#print(event.key)
 
 	# up
 	if (event.key == 273 and data.scrollY > -200):
