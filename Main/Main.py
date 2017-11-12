@@ -12,11 +12,11 @@ def init(data):
     data.players = pygame.sprite.Group()
     Characters.initCharacter(data)
     data.minions = Minions.Minions()
-    data.minion = Minions.Minion((100, 30), data)
-    data.minions.add(data.minion)
+    data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
+    data.minionNum = 1
 
 
 def mouseDown(event, data):
