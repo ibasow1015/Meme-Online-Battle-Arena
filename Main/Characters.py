@@ -7,17 +7,17 @@ class Player(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		x, y = pos
 		self.dest = [x, y]
-		self.fireDest = [x, y]
+
 		self.gold = 200
 		self.pos = [x, y]
 		self.animationState = 0
 		self.animationDirection = 'right'
 		self.movementState = 'still'
 		self.name = name
-		self.fireOn = 'off'
-		self.fireState = 0
 
 
+	def getName(self):
+		return self.character
 
 	def move(self, data, epsilon=6):
 		# location command
@@ -38,7 +38,6 @@ class Player(pygame.sprite.Sprite):
 			xDir = -1
 		if (dy < 0):
 			yDir = -1
-
 
 		if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
 			self.movementState = 'still'
@@ -75,19 +74,8 @@ class Player(pygame.sprite.Sprite):
 		self.pos = [x, y]
 
 
-
-		#print('bowser', self.rect.center)
-
-	def drawFire(self, display):
-		self.ability3Move()
-
-		x, y = self.fireRect[0], self.fireRect[1]
-
-		display.blit(self.fireImage, (x, y))
-
 	def update(self, display, data):
-		if (self.fireOn == 'on'):
-			self.drawFire(display)
+
 
 		self.move(data)
 		self.animateWalk(self.animationDirection)
