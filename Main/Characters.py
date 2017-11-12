@@ -160,7 +160,7 @@ def initCharacter(data):
 			data.player = Mario.Mario(data, (50, 50), 'Player1','red')
 			break
 		elif (character == 'bowser'):
-			data.player = Bowser.Bowser(data, (50, 50), 'Player1','')
+			data.player = Bowser.Bowser(data, (50, 50), 'Player1','blue')
 			break
 		print('invalid input')
 	data.players.add(data.player)

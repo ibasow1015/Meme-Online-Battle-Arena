@@ -1,13 +1,36 @@
 import pygame, sys
 from pygame.locals import *
 import Characters
+import Mario
+import Bowser
 import UI
 import icons
 import Minions
 import drawMap
 import ChainChomp
 import Projectiles
+import socket
+import threading
+from queue import Queue
 
+HOST = "128.237.132.204" # put your IP address here if playing on multiple computers
+PORT = 50003
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+server.connect((HOST,PORT))
+print("connected to server")
+
+def handleServerMsg(server, serverMsg):
+  server.setblocking(1)
+  msg = ""
+  command = ""
+  while True:
+    msg += server.recv(10).decode("UTF-8")
+    command = msg.split("\n")
+    while (len(command) > 1):
+      readyMsg = command[0]
+      msg = "\n".join(command[1:])
+      serverMsg.put(readyMsg)
+      command = msg.split("\n")
 
 def init(data):
     data.backGround = drawMap.backGround()
@@ -43,11 +66,14 @@ def init(data):
 
 
 def mouseDown(event, data):
+    msg=''
     if(event.button==3):
         data.player.autoAttack(data,event.pos)
+        msg+='move %d %d\n'%(event.pos[0],event.pos[1])
     if (event.button == 3 and data.fireOn == 'off'):
         data.player.dest = [event.pos[0] + data.scrollX,
                             event.pos[1] + data.scrollY]
+        msg+='B3 %s\n'%(str(event.pos))
 
     if (event.button == 3 and data.fireOn == 'on'):
         data.player.fireDest = list(event.pos)
@@ -55,10 +81,15 @@ def mouseDown(event, data):
             if data.player.fireOn == 'off':
                 data.player.ability3()
         data.fireOn = "off"
+        msg+='B3 %s\n'%(str(event.pos))
+
+    if(msg!=''):
+        print('sending:',msg)
+        data.server.send(msg.encode())
 
 
 def mouseUp(event, data):
-    pass
+    print(data.players)
 
 
 def keypress(data):
@@ -77,21 +108,31 @@ def keypress(data):
 
 
 def keyDown(event, data):
+    msg=''
     # print(event.key)
 
     # print(data.scrollX)
 
     if (event.unicode == '1'):
         data.player.ability1()
+        msg+='%s1\n'%(data.player.letter)
     if (event.unicode == '2'):
         data.player.ability2()
+        msg+='%s2\n'%(data.player.letter)
     if (event.unicode == '3'):
         if data.player.getName() == 'Bowser':
-	        data.fireOn = 'on'
+            data.fireOn = 'on'
+            msg+='B3\n'
         else:
             data.player.ability3()
+            msg+='M3\n'
     if (event.unicode == '4'):
         data.player.ability4()
+        msg+='%s4\n'%(data.player.letter)
+
+    if(msg!=''):
+        print('sending:',msg)
+        data.server.send(msg.encode())
 
 
 def keyUp(event, data):
@@ -102,7 +143,91 @@ def keyUp(event, data):
 def timerFired(data):
     data.timer += 250
     data.minions.update(data.timer, data)
-    pass
+    
+    if (serverMsg.qsize() > 0):
+        msg = serverMsg.get(False)
+
+        try:
+            print("received: ", msg, "\n")
+            msg = msg.split()
+            command = msg[0]
+            print(command)
+
+            if(command=='newPlayer'):
+                newPID = msg[1]
+                while (True):
+                    print('Select character:')
+                    character = input('-->').lower()
+                    if (character == 'mario'):
+                        user = Mario.Mario(data, (50, 50), newPID,'red')
+                        data.players.add(user)
+                        print('player added')
+                        break
+                    elif (character == 'bowser'):
+                        user = Bowser.Bowser(data, (50, 50), newPID,'blue')
+                        data.players.add(user)
+                        print('player added')
+                        break
+                    print('invalid input')
+                print(data.players)
+
+            if(command=='move'):
+                x=int(msg[2])
+                y=int(msg[3])
+                coords=(x,y)
+                print('coords:',coords)
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user):
+                        player.dest=[coords[0]+data.scrollX,coords[1]+data.scrollY]
+
+            if(command=='B1'):
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user and player.letter=='B'):
+                        player.ability1()
+
+            if(command=='B2'):
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user and player.letter=='B'):
+                        player.ability2()
+
+            if(command=='B4'):
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user and player.letter=='B'):
+                        player.ability4()
+
+            if(command=='M1'):
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user and player.letter=='M'):
+                        player.ability1()
+
+            if(command=='M2'):
+                print('mario ability 2')
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user and player.letter=='M'):
+                        player.ability2()
+
+            if(command=='M3'):
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user and player.letter=='M'):
+                        player.ability3()
+
+            if(command=='M4'):
+                user=msg[1]
+                for player in data.players:
+                    if(player.name==user and player.letter=='M'):
+                        player.ability4()
+
+        except:
+            print("failed")
+            serverMsg.task_done()
+
 
 
 def redrawAll(display, data):
@@ -116,7 +241,7 @@ def redrawAll(display, data):
     icons.drawIcons(display, data)
 
 
-def run(width=300, height=300):
+def run(width=300, height=300,serverMsg=None, server=None):
     def redrawAllWrapper(display, data):
         display.fill((255, 255, 255))
         redrawAll(display, data)
@@ -154,6 +279,8 @@ def run(width=300, height=300):
     data = Struct()
     data.width = width
     data.height = height
+    data.server = server
+    data.serverMsg = serverMsg
     data.fps = 30  # frames per second
     data.fpsClock = pygame.time.Clock()
     init(data)
@@ -182,5 +309,7 @@ def run(width=300, height=300):
 
         timerFiredWrapper(display, data)
 
+serverMsg = Queue(100)
+threading.Thread(target = handleServerMsg, args = (server, serverMsg)).start()
 
-run(1280, 720)
+run(1280, 720,serverMsg, server)
