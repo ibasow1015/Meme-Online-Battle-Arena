@@ -75,13 +75,17 @@ def drawResourceBars(display, data):
     EnergyboxY = data.height - data.width * .025
     boxWidth = data.width * .3
     boxHeight = data.height * .025
+    healthLabel=data.font.render(str(data.player.health)+'/'+str(data.player.maxHealth),1,(0,0,0))
     pygame.draw.rect(display, (255, 0, 0),
                      (boxX, HealthboxY, boxWidth, boxHeight))
     healthPercentage = data.player.health / data.player.maxHealth
     pygame.draw.rect(display, (0, 255, 0),
                      (boxX, HealthboxY, boxWidth * healthPercentage, boxHeight))
+    display.blit(healthLabel,(data.width*.42,data.height-data.width*.05))
+    energyLabel=data.font.render(str(data.player.energy)+'/'+str(data.player.maxEnergy),1,(0,0,0))
     pygame.draw.rect(display, (255, 0, 0),
                      (boxX, EnergyboxY, boxWidth, boxHeight))
     energyPercentage = data.player.energy / data.player.maxEnergy
     pygame.draw.rect(display, (255, 255, 0),
                      (boxX, EnergyboxY, boxWidth * energyPercentage, boxHeight))
+    display.blit(energyLabel,(data.width*.42,data.height-data.width*.025))
