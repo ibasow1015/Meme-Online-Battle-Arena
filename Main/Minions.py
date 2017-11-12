@@ -1,4 +1,5 @@
 from pygame import *
+import pygame
 import os
 
 
