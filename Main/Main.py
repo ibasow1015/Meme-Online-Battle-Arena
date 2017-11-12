@@ -8,23 +8,8 @@ import drawMap
 import ChainChomp
 
 def init(data):
-<<<<<<< HEAD
-	data.backGround=drawMap.backGround()
-	data.mapWidth = 7000
-	data.mapHeight = 7000
-	data.unit = data.width / 100
 	data.towers=pygame.sprite.Group()
-	ChainChomp.initTowers(data)
-	data.players = pygame.sprite.Group()
-	Characters.initCharacter(data)
-	data.minions = Minions.Minions()
-	data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
-	data.timer = 0
-	icons.initIcons(data)
-	data.scrollX = data.scrollY = 0
-	data.minionNum = 1
-	data.mapStep = 50
-=======
+	data.backGround=drawMap.backGround()
     data.unit = data.width / 100
     data.players = pygame.sprite.Group()
     Characters.initCharacter(data)
@@ -42,14 +27,9 @@ def init(data):
     data.towers = pygame.sprite.Group()
     ChainChomp.initTowers(data)
     data.players = pygame.sprite.Group()
-    Characters.initCharacter(data)
-    data.minions = Minions.Minions()
     data.minions.spawnMinionWave((200, 7000 // 3), data, "left", "top")
-    icons.initIcons(data)
     data.minionNum = 1
-    data.mapStep = 50
     data.fireOn = 'off'
->>>>>>> 0dddc4039ba54d2944db5bb1e7e0954ba13d363a
 
 
 def mouseDown(event, data):
