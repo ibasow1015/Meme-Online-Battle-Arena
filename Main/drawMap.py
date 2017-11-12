@@ -3,83 +3,99 @@ import ChainChomp
 import os
 
 
-def drawMap(data, display):
-    # map dimensions
-    data.mapWidth = 7000
-    data.mapHeight = 7000
+class Map(object):
+	def __init__(self, data, width, height, offset):
+		#def drawMap(data, display, width, height):
+		# map dimensions
+		self.width = width
+		self.height = height
+		self.sx = offset[0]
+		self.sy = offset[1]
 
-    height = data.mapHeight
-    width = data.mapWidth
+		self.margin = 100
+		self.baseRad = height * 1 // 5
+		self.towerRad = height // 100
 
-    sx = data.scrollX
-    sy = data.scrollY
+		self.tower1Color = (0, 0, 255)
+		self.tower2Color = (255, 0, 0)
 
-    margin = 100
-    baseRad = height * 1 // 5
-    towerRad = height // 100
+		self.imgwidth = data.mapWidth//7
+		self.imgheight = data.mapHeight//7
+		self.background = Background(data)
 
-    tower1Color = (0, 0, 255)
-    tower2Color = (255, 0, 0)
+		# Draw the whole map
 
-    # print(grassImage.get_height())
+	def drawMap(self, display):
+		# Draws bases
+		pygame.draw.ellipse(display, (153, 50, 204),
+						(0 - self.baseRad - self.sx,
+						 self.height - self.baseRad // 2 - self.sy,
+						 self.baseRad * 2, self.baseRad))
+		pygame.draw.ellipse(display, (153, 50, 204),
+						(self.width - self.baseRad - self.sx,
+						 0 - self.baseRad // 2 - self.sy,
+						 self.baseRad * 2, self.baseRad))
 
-    # Draw the whole map
-    # pygame.draw.rect(display, (0, 255, 0), (0 - data.scrollX, 0 - data.scrollY,
-    # width, height))
+		# Draws blue towers
+		pygame.draw.ellipse(display, self.tower1Color,
+					(self.margin - self.towerRad - self.sx,
+					self.height * 3 // 10 - self.towerRad // 2 - self.sy,
+					self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower1Color,
+					(self.margin - self.towerRad - self.sx,
+					 self.height // 2 - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower1Color,
+					(self.width // 2 - self.towerRad - self.sx,
+					 self.height-self.margin - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower1Color,
+					(self.width * 7 // 10 - self.towerRad - self.sx,
+					 self.height-self.margin - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower1Color,
+					(self.width// 2 - 4 * self.margin - self.towerRad - self.sx,
+					 self.height // 2 + 4 * self.margin - \
+					 self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower1Color,
+					(self.width // 4 - self.towerRad - self.sx,
+					 self.height * 3 // 4 - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+
+		# Draws red towers
+		pygame.draw.ellipse(display, self.tower2Color,
+					(self.width * 3 // 10 - self.towerRad - self.sx,
+					 self.margin - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower2Color,
+					(self.width // 2 - self.towerRad - self.sx,
+					 self.margin - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower2Color,
+					(self.width - self.margin - self.towerRad - self.sx,
+					 self.height // 2 - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower2Color,
+					(self.width - self.margin - self.towerRad - self.sx,
+					 self.height * 7 // 10 - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower2Color,
+					(self.width // 2 + 4 * self.margin - self.towerRad -self.sx,
+					 self.height // 2 - 4 * self.margin -\
+					 self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		pygame.draw.ellipse(display, self.tower2Color,
+					(self.width * 3 // 4 - self.towerRad - self.sx,
+					 self.height // 4 - self.towerRad // 2 - self.sy,
+					 self.towerRad * 2, self.towerRad))
+		for i in range(7):
+			for j in range(7):
+				display.blit(self.background.image,
+						 (0 - self.sx + self.imgwidth * i, 0 - self.sy + self.imgheight * j, self.imgwidth,
+							  self.imgheight))
 
 
-
-
-    # Draws bases
-    pygame.draw.ellipse(display, (153, 50, 204), (0 - baseRad - sx,
-                                                  height - baseRad // 2 - sy,
-                                                  baseRad * 2, baseRad))
-    pygame.draw.ellipse(display, (153, 50, 204), (width - baseRad - sx,
-                                                  0 - baseRad // 2 - sy,
-                                                  baseRad * 2,
-                                                  baseRad))
-
-    # Draws blue towers
-    pygame.draw.ellipse(display, tower1Color, (margin - towerRad - sx,
-                                               height * 3 // 10 - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower1Color, (margin - towerRad - sx,
-                                               height // 2 - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower1Color, (width // 2 - towerRad - sx,
-                                               height - margin - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower1Color, (width * 7 // 10 - towerRad - sx,
-                                               height - margin - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower1Color,
-                        (width // 2 - 4 * margin - towerRad - sx,
-                         height // 2 + 4 * margin - towerRad // 2 - sy,
-                         towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower1Color, (width // 4 - towerRad - sx,
-                                               height * 3 // 4 - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-
-    # Draws red towers
-    pygame.draw.ellipse(display, tower2Color, (width * 3 // 10 - towerRad - sx,
-                                               margin - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower2Color, (width // 2 - towerRad - sx,
-                                               margin - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower2Color, (width - margin - towerRad - sx,
-                                               height // 2 - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower2Color, (width - margin - towerRad - sx,
-                                               height * 7 // 10 - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower2Color,
-                        (width // 2 + 4 * margin - towerRad - sx,
-                         height // 2 - 4 * margin - towerRad // 2 - sy,
-                         towerRad * 2, towerRad))
-    pygame.draw.ellipse(display, tower2Color, (width * 3 // 4 - towerRad - sx,
-                                               height // 4 - towerRad // 2 - sy,
-                                               towerRad * 2, towerRad))
 
 def move(data, x, y):
   # x, y is either 0 or 1 or -1
@@ -157,3 +173,4 @@ def drawBoard(data, display):
           else:
             data.backGround.image = data.backGround.default
           display.blit(data.backGround.image,(0 - sx + 1000 * i, 0 - sy + 1000 * j, 1000, 1000))
+
