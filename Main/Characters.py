@@ -9,45 +9,32 @@ class Player(pygame.sprite.Sprite):
         x, y = pos
         self.dest = [x, y]
         self.gold = 200
-#<<<<<<< HEAD
         self.pos = [x, y]
-#=======
         self.animationState = 0
         self.animationDirection = 'right'
         self.movementState = 'still'
-#>>>>>>> e6e575192fe8608703c0ca9e028dd028841b22b1
 
     def move(self, data, epsilon=6):
         # location command
         destX, destY = self.dest[0], self.dest[1]
         # current location
-        """x, y = self.rect.center[0] + data.scrollX, \
-               self.rect.center[1] + data.scrollY"""
         x, y = self.pos[0], self.pos[1]
-        """print(self.rect.center[0], self.rect.center[1])"""
-        # distance to travel
         dx = destX - x
         dy = destY - y
-        # placeholder for direction
         xDir, yDir = 1, 1
         if (dx < 0):
             xDir = -1
         if (dy < 0):
             yDir = -1
-            # do nothing if character is within range to prevent spazzing
         if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
-#<<<<<<< HEAD
-            #self.rect.center = (x, y)
             self.movementState = 'still'
         elif (dy < epsilon and dy > -epsilon):
-            #self.rect.center = (x + self.speed * xDir, y)
             x += self.speed*xDir
             if (xDir > 0):
                 self.animationDirection = 'right'
             else:
                 self.animationDirection = 'left'
         elif (dx < epsilon and dx > -epsilon):
-            #self.rect.center = (x, y + self.speed * yDir)
             y += self.speed*yDir
             if (xDir > 0):
                 self.animationDirection = 'right'
@@ -55,13 +42,10 @@ class Player(pygame.sprite.Sprite):
                 self.animationDirection = 'left'
 
         else:
-            # get vector angle
             theta = abs(math.atan(dy / dx))
             # calculate unit vector
             i = self.speed * math.cos(theta) * xDir
             j = self.speed * math.sin(theta) * yDir
-#<<<<<<< HEAD
-            #self.rect.center = (x + i, y + j)
             x += i
             y += j
             self.movementState = 'moving'
