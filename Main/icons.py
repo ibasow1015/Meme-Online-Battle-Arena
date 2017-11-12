@@ -58,9 +58,8 @@ class ResistIcon(pygame.sprite.Sprite):
 class MagicIcon(pygame.sprite.Sprite):
     def __init__(self, data, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join('sprites/magic_icon.png'))
-        self.image = pygame.transform.scale(self.image, (
-            int(data.width * .02), int(data.width * .02)))
+        self.image = pygame.Surface((data.width * .02, data.width * .02))
+        self.image.fill((255, 255, 0))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
@@ -68,9 +67,8 @@ class MagicIcon(pygame.sprite.Sprite):
 class DamageIcon(pygame.sprite.Sprite):
     def __init__(self, data, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join('sprites/damage_icon.png'))
-        self.image = pygame.transform.scale(self.image, (
-            int(data.width * .02), int(data.width * .02)))
+        self.image = pygame.Surface((data.width * .02, data.width * .02))
+        self.image.fill((255, 255, 0))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
