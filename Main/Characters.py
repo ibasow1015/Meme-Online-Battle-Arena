@@ -40,6 +40,15 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.move()
 
+    def setX(self, x):
+        self.rect.x += x
+
+    def setY(self, y):
+        self.rect.y += y
+
+    def setDestination(self, x, y):
+        self.dest = (x, y)
+
 class Test(Player):
     def __init__(self, x, y, name):
         Player.__init__(self, x, y, name)
@@ -73,6 +82,9 @@ class Test(Player):
         self.energy -= 50
         if (self.energy < 0):
             self.energy = 0
+
+    def getCenter(self):
+        return self.rect.center
 
 def initCharacter(data):
     data.player = Test(50, 50, 'Player1')
