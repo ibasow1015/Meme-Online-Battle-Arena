@@ -1,4 +1,5 @@
 import pygame
+import ChainChomp
 
 
 class Map(object):
@@ -94,10 +95,11 @@ class Map(object):
 							  self.imgheight))
 
 
+
 def move(data, x, y):
-    # x, y is either 0 or 1 or -1
-    data.scrollX += x * data.mapStep
-    data.scrollY += y * data.mapStep
+  # x, y is either 0 or 1 or -1
+  data.scrollX += x * data.mapStep
+  data.scrollY += y * data.mapStep
 
 
 class Background(pygame.sprite.Sprite):
@@ -106,6 +108,4 @@ class Background(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(pygame.image.load(
             'sprites/grass.png'
             ''), (data.mapWidth//7, data.mapHeight//7))
-
-
 
