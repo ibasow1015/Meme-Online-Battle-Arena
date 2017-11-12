@@ -9,21 +9,6 @@ import drawMap
 
 
 def init(data):
-<<<<<<< HEAD
-    data.unit = data.width / 100
-    data.players = pygame.sprite.Group()
-    Characters.initCharacter(data)
-    data.minions = Minions.Minions()
-    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "top",
-                                 data)
-    data.minions.spawnMinionWave((7000 // 3, 200), (200, 200), "right", "top",
-                                 data)
-    data.timer = 0
-    icons.initIcons(data)
-    data.scrollX = data.scrollY = 0
-    data.minionNum = 1
-    data.mapStep = 50
-=======
 	data.backGround=drawMap.backGround()
 	data.mapWidth = 7000
 	data.mapHeight = 7000
@@ -39,25 +24,16 @@ def init(data):
 	data.scrollX = data.scrollY = 0
 	data.minionNum = 1
 	data.mapStep = 50
->>>>>>> parent of 3ae0b97... lanes
 
 
 def mouseDown(event, data):
     if (event.button == 3):
-<<<<<<< HEAD
-        data.player.dest = [event.pos[0] + data.scrollX, \
-=======
         data.player.dest = [event.pos[0] + data.scrollX,\
->>>>>>> parent of 3ae0b97... lanes
                             event.pos[1] + data.scrollY]
 
 
 def mouseUp(event, data):
     pass
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 3ae0b97... lanes
 
 def keypress(data):
     keys = pygame.key.get_pressed()
