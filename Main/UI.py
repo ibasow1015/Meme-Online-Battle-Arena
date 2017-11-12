@@ -64,7 +64,7 @@ def drawAbilitySlots(display, data):
     slotMargin = data.width * .0125
     slotWidth = data.width * .06
     for i in range(4):
-        pygame.draw.rect(display, (255, 255, 255), (
+        pygame.draw.rect(display, (0, 0, 255), (
         boxX + slotMargin + (slotMargin + slotWidth) * i, boxY + slotMargin,
         slotWidth, slotWidth))
 

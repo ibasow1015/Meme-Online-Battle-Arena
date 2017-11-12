@@ -27,6 +27,10 @@ class Player(pygame.sprite.Sprite):
         if (dy < 0):
             yDir = -1
         if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
+<<<<<<< HEAD
+=======
+            #self.rect.center = (x, y)
+>>>>>>> a602cdd315cfe4d22456323b7473033ae0044361
             self.movementState = 'still'
         elif (dy < epsilon and dy > -epsilon):
             x += self.speed*xDir
@@ -91,8 +95,18 @@ import Mario
 import Bowser
 
 def initCharacter(data):
-    data.player = Bowser.Bowser(data, (50, 50), 'Player1')
-    data.players.add(data.player)
+	data.player=None
+	while(data.player==None):
+		print('Select character:')
+		character=input('-->')
+		if(character=='mario'):
+			data.player=Mario.Mario(data,(50,50),'Player1')
+			break
+		elif(character=='bowser'):
+			data.player=Bowser.Bowser(data,(50,50),'Player1')
+			break
+		print('invalid input')
+	data.players.add(data.player)
 
 
 def drawCharacter(display, data):
