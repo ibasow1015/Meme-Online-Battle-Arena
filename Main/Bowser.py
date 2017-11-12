@@ -186,7 +186,6 @@ class Bowser(Characters.Player):
 				self.image=pygame.transform.scale(self.image,(self.width,self.height))
 				self.image = pygame.transform.flip(self.image, True, False)
 			else:
-				print('hi')
 				if(self.animationState==0):
 					self.image=pygame.image.load(os.path.join('sprites/bowser/bowser_r2.png'))
 					self.image=pygame.transform.scale(self.image,(self.width,self.height))
