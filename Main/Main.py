@@ -1,5 +1,4 @@
-import pygame
-import sys
+import pygame, sys
 from pygame.locals import *
 import Characters
 import UI
@@ -7,6 +6,7 @@ import icons
 import Minions
 import drawMap
 import ChainChomp
+
 
 def init(data):
 	data.backGround=drawMap.Background()
@@ -43,11 +43,10 @@ def mouseDown(event, data):
 
     if (event.button == 3 and data.fireOn == 'on'):
         data.player.fireDest = list(event.pos)
-        print(data.player.fireDest)
-        if (data.player.getName() == 'Bowser'):
-            if (data.player.fireOn == 'off'):
+        if data.player.getName() == "bowser":
+            if data.player.fireOn == 'off':
                 data.player.ability3()
-        data.fireOn = 'off'
+        data.fireOn = "off"
 
 
 def mouseUp(event, data):
@@ -79,11 +78,8 @@ def keyDown(event, data):
     if (event.unicode == '2'):
         data.player.ability2()
     if (event.unicode == '3'):
-        if (data.player.getName() == 'Bowser'):
-            print('hi')
-            data.fireOn = 'on'
-        else:
-            data.player.ability3()
+        data.fireOn = "on" if data.player.getName() == "Bowser" else data.fireOn
+        data.player.ability3()
     if (event.unicode == '4'):
         data.player.ability4()
 
@@ -100,12 +96,13 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
-    data.map.drawMap(display)
+    drawMap.drawBoard(data, display)
+    drawMap.drawMap(data, display)
     Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
-    ChainChomp.updateTowers(display,data)
     UI.drawTaskbar(display, data)
     icons.drawIcons(display, data)
+
 
 def run(width=300, height=300):
 	def redrawAllWrapper(display, data):
@@ -172,7 +169,6 @@ def run(width=300, height=300):
 		keypress(data)
 
 		timerFiredWrapper(display, data)
-
 
 
 run(1280, 720)
