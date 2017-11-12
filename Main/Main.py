@@ -64,7 +64,8 @@ def keyDown(event, data):
 
 
 def keyUp(event, data):
-    pass
+    if (event.key == 273):
+        data.downPressed = False
 
 
 def timerFired(data):
@@ -74,6 +75,7 @@ def timerFired(data):
 
 
 def redrawAll(display, data):
+    drawMap.drawBoard(data, display)
     drawMap.drawMap(data, display)
     Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
@@ -145,4 +147,4 @@ def run(width=300, height=300):
         timerFiredWrapper(display, data)
 
 
-run(1920, 1080)
+run(1280, 720)

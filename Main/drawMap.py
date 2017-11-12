@@ -22,9 +22,14 @@ def drawMap(data, display):
     tower1Color = (0, 0, 255)
     tower2Color = (255, 0, 0)
 
+    # print(grassImage.get_height())
+
     # Draw the whole map
-    pygame.draw.rect(display, (0, 255, 0), (0 - data.scrollX, 0 - data.scrollY, \
-                                            width, height))
+    # pygame.draw.rect(display, (0, 255, 0), (0 - data.scrollX, 0 - data.scrollY,
+    # width, height))
+
+
+
 
     # Draws bases
     pygame.draw.ellipse(display, (0, 0, 0), (0 - baseRad - sx,
@@ -81,3 +86,23 @@ def move(data, x, y):
     # x, y is either 0 or 1 or -1
     data.scrollX += x * data.mapStep
     data.scrollY += y * data.mapStep
+
+
+class backGround(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.transform.scale(pygame.image.load(
+            'sprites/grass.png'
+            ''), (1000, 1000))
+
+
+def drawBoard(self, display):
+    backGround.__init__(self)
+
+    sx = self.scrollX
+    sy = self.scrollY
+
+    for i in range(7):
+        for j in range(7):
+            display.blit(self.image,
+                         (0 - sx + 1000 * i, 0 - sy + 1000 * j, 1000, 1000))

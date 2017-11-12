@@ -1,5 +1,6 @@
 import pygame
 import math
+import os
 
 
 class Player(pygame.sprite.Sprite):
@@ -7,6 +8,9 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.dest = [x, y]
         self.gold = 200
+        self.animationState = 0
+        self.animationDirection = 'right'
+        self.movementState = 'still'
 
     def move(self, epsilon=6):
         # location command
@@ -25,10 +29,19 @@ class Player(pygame.sprite.Sprite):
             # do nothing if character is within range to prevent spazzing
         if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
             self.rect.center = (x, y)
+            self.movementState = 'still'
         elif (dy < epsilon and dy > -epsilon):
             self.rect.center = (x + self.speed * xDir, y)
+            if (xDir > 0):
+                self.animationDirection = 'right'
+            else:
+                self.animationDirection = 'left'
         elif (dx < epsilon and dx > -epsilon):
             self.rect.center = (x, y + self.speed * yDir)
+            if (xDir > 0):
+                self.animationDirection = 'right'
+            else:
+                self.animationDirection = 'left'
         else:
             # get vector angle
             theta = abs(math.atan(dy / dx))
@@ -36,9 +49,18 @@ class Player(pygame.sprite.Sprite):
             i = self.speed * math.cos(theta) * xDir
             j = self.speed * math.sin(theta) * yDir
             self.rect.center = (x + i, y + j)
+            self.movementState = 'moving'
+            if (abs(i) > abs(j) or yDir == 1):
+                if (xDir > 0):
+                    self.animationDirection = 'right'
+                else:
+                    self.animationDirection = 'left'
+            else:
+                self.animationDirection = 'up'
 
     def update(self):
-        self.move()
+        self.move(15)
+        self.animateWalk(self.animationDirection)
 
     def setX(self, x):
         self.rect.x += x
@@ -52,6 +74,7 @@ class Player(pygame.sprite.Sprite):
 
     def getDestination(self):
         return self.dest
+
 
 class Test(Player):
     def __init__(self, x, y, name):
@@ -90,9 +113,73 @@ class Test(Player):
     def getCenter(self):
         return self.rect.center
 
+    def animateWalk(self, direction):
+        self.animationState += 1
+        self.animationState %= 4
+        if (direction == 'right'):
+            if (self.movementState == 'still'):
+                self.image = pygame.image.load(
+                    os.path.join('sprites/mario_r1.png'))
+                self.image = pygame.transform.scale(self.image, (25, 50))
+            else:
+                if (self.animationState == 0):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_r1.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+                elif (self.animationState == 1):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_r2.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+                elif (self.animationState == 2):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_r3.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+                elif (self.animationState == 3):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_r4.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+        if (direction == 'left'):
+            if (self.movementState == 'still'):
+                self.image = pygame.image.load(
+                    os.path.join('sprites/mario_l1.png'))
+                self.image = pygame.transform.scale(self.image, (25, 50))
+            else:
+                if (self.animationState == 0):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_l1.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+                elif (self.animationState == 1):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_l2.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+                elif (self.animationState == 2):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_l3.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+                elif (self.animationState == 3):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_l4.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+        if (direction == 'up'):
+            if (self.movementState == 'still'):
+                self.image = pygame.image.load(
+                    os.path.join('sprites/mario_uN.png'))
+                self.image = pygame.transform.scale(self.image, (25, 50))
+            else:
+                if (self.animationState == 0 or self.animationState == 2):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_u1.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+                elif (self.animationState == 1 or self.animationState == 3):
+                    self.image = pygame.image.load(
+                        os.path.join('sprites/mario_u2.png'))
+                    self.image = pygame.transform.scale(self.image, (25, 50))
+
+
 def initCharacter(data):
     data.player = Test(50, 50, 'Player1')
     data.players.add(data.player)
+
 
 def drawCharacter(display, data):
     data.players.update()

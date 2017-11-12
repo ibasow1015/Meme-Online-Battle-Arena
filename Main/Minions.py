@@ -1,5 +1,6 @@
 from pygame import *
 
+
 class Minions(sprite.Group):
     def __init__(self):
         super(Minions, self).__init__(self)
@@ -12,8 +13,10 @@ class Minions(sprite.Group):
     def drawMinions(self, gameMap):
         self.draw(gameMap)
 
+
 class Minion(sprite.Sprite):
     minions = Minions()
+
     def __init__(self, startingPosition, data):
         super(Minion, self).__init__()
         self.image = Surface((30, 30))
@@ -35,7 +38,7 @@ class Minion(sprite.Sprite):
 
     def update(self, timer, data):
         if not timer % 1000:
-            self.rect.x += 10
+            self.rect.x += 6
             self.rect.y += 6
 
     def setX(self, x):
