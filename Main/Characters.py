@@ -1,9 +1,11 @@
 import pygame
 import math
 import Projectiles
+import Minions
+
 
 class Player(pygame.sprite.Sprite):
-	def __init__(self, data, pos, name,team):
+	def __init__(self, data, pos, name, team):
 		pygame.sprite.Sprite.__init__(self)
 		x, y = pos
 		self.dest = [x, y]
@@ -14,10 +16,8 @@ class Player(pygame.sprite.Sprite):
 		self.animationDirection = 'right'
 		self.movementState = 'still'
 		self.name = name
-		self.fireOn = 'off'
-		self.fireState = 0
-		self.autoAttackState=False
-
+		self.team = team
+		self.autoAttackState = False
 
 	def getName(self):
 		return self.character
@@ -29,13 +29,10 @@ class Player(pygame.sprite.Sprite):
 		# current location
 		x, y = self.pos[0], self.pos[1]
 
-
 		dx = destX - x
 		dy = destY - y
 
-
 		xDir, yDir = 1, 1
-
 
 		if (dx < 0):
 			xDir = -1
@@ -43,6 +40,7 @@ class Player(pygame.sprite.Sprite):
 			yDir = -1
 
 		if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
+
 			self.movementState = 'still'
 		elif (dy < epsilon and dy > -epsilon):
 			x += self.speed * xDir
@@ -76,29 +74,22 @@ class Player(pygame.sprite.Sprite):
 		self.rect.center = (x - data.scrollX, y - data.scrollY)
 		self.pos = [x, y]
 
-		#print('bowser', self.rect.center)
+	# print('bowser', self.rect.center)
 
-	def autoAttack(self,data,pos):
-		for minion in data.minions:
-			if(minion.rect.collidepoint(pos)):
-				dist=((self.rect.center[0]-minion.rect.center[0])**2+(self.rect.center[1]+minion.rect.center[1])**2)**.5
-				print(dist)
-				if(dist<=self.attackRange):
-					self.autoAttackState=True
-					print('projectile fired')
-					data.projectiles.add(Projectiles.Projectile(self.rect.center,minion,self.projectileSpeed,self.damage))
-
-
-	def drawFire(self, display):
-		self.ability3Move()
-
-		x, y = self.fireRect[0], self.fireRect[1]
-
-		display.blit(self.fireImage, (x, y))
+	def autoAttack(self, data, pos):
+		for minion in Minions.Minion.minions.sprites():
+			if (minion.rect.collidepoint(pos)):
+				dist = ((self.rect.center[0] - minion.rect.center[0]) ** 2 + (
+				self.rect.center[1] + minion.rect.center[1]) ** 2) ** .5
+				if (dist <= self.attackRange):
+					self.autoAttackState = True
+					data.projectiles.add(
+						Projectiles.Projectile(self.rect.center, minion,
+											   self.projectileSpeed,
+											   self.damage))
 
 
 	def update(self, display, data):
-
 
 		self.move(data)
 		self.animateWalk(self.animationDirection)
@@ -124,31 +115,32 @@ class Player(pygame.sprite.Sprite):
 		display.blit(nameLabel, (self.rect.x - 2, HealthboxY - 17))
 
 		pygame.draw.rect(display, (255, 0, 0),
-		                 (boxX, HealthboxY, boxWidth, healthBoxHeight))
+						 (boxX, HealthboxY, boxWidth, healthBoxHeight))
 		healthPercentage = data.player.health / data.player.maxHealth
 		pygame.draw.rect(display, (0, 255, 0),
-		                 (boxX, HealthboxY, boxWidth * healthPercentage,
-		                  healthBoxHeight))
+						 (boxX, HealthboxY, boxWidth * healthPercentage,
+						  healthBoxHeight))
 		for i in range(data.player.maxHealth // 100):
 			x = boxX + (boxWidth / (data.player.maxHealth / 100)) * (i + 1)
 			pygame.draw.line(display, (0, 0, 0), (x, HealthboxY),
-			                 (x, HealthboxY + healthBoxHeight))
+							 (x, HealthboxY + healthBoxHeight))
 
 		pygame.draw.rect(display, (255, 0, 0),
-		                 (boxX, EnergyboxY, boxWidth, energyBoxHeight))
+						 (boxX, EnergyboxY, boxWidth, energyBoxHeight))
 		energyPercentage = data.player.energy / data.player.maxEnergy
 		pygame.draw.rect(display, (255, 255, 0),
-		                 (boxX, EnergyboxY, boxWidth * energyPercentage,
-		                  energyBoxHeight))
+						 (boxX, EnergyboxY, boxWidth * energyPercentage,
+						  energyBoxHeight))
 
 		for i in range(data.player.maxEnergy // 100):
 			x = boxX + (boxWidth / (data.player.maxEnergy / 100)) * (i + 1)
 			pygame.draw.line(display, (0, 0, 0), (x, EnergyboxY),
-			                 (x, EnergyboxY + energyBoxHeight))
+							 (x, EnergyboxY + energyBoxHeight))
 
 
 import Mario
 import Bowser
+import Yoshi
 
 
 def initCharacter(data):
@@ -157,11 +149,15 @@ def initCharacter(data):
 		print('Select character:')
 		character = input('-->').lower()
 		if (character == 'mario'):
-			data.player = Mario.Mario(data, (50, 50), 'Player1','red')
+			data.player = Mario.Mario(data, (50, 50), 'Player1', 'red')
 			break
 		elif (character == 'bowser'):
-			data.player = Bowser.Bowser(data, (50, 50), 'Player1','blue')
+			data.player = Bowser.Bowser(data, (50, 50), 'Player1', '')
 			break
+		elif(character == 'yoshi'):
+			data.player = Yoshi.Yoshi(data, (50,50), 'Player1', '')
+			break
+
 		print('invalid input')
 	data.players.add(data.player)
 

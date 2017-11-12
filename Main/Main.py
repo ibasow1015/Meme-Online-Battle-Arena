@@ -33,36 +33,40 @@ def handleServerMsg(server, serverMsg):
       command = msg.split("\n")
 
 def init(data):
-    data.backGround = drawMap.backGround()
-    data.mapWidth = 7000
-    data.mapHeight = 7000
-    data.unit = data.width / 100
-    data.towers = pygame.sprite.Group()
-    ChainChomp.initTowers(data)
-    data.players = pygame.sprite.Group()
-    Characters.initCharacter(data)
-    data.minions = Minions.Minions()
-    data.minions.spawnMinionWave((500, data.mapHeight * 7 / 8), (500, 500),
-                                 "left", "top", data)
-    data.minions.spawnMinionWave((data.mapWidth * 7 / 8, 500), (500, 500),
-                                 "right", "top", data)
-    data.minions.spawnMinionWave((6500, data.mapHeight * 1 / 10), (6500, 6500),
-                                 "right", "bottom", data)
-    data.minions.spawnMinionWave((data.mapWidth * 1 / 10, 6500), (6500, 6500),
-                                 "left", "bottom", data)
+	data.backGround = drawMap.backGround()
+	data.mapWidth = 7000
+	data.mapHeight = 7000
+	data.unit = data.width / 100
+	data.towers = pygame.sprite.Group()
+	ChainChomp.initTowers(data)
+	data.players = pygame.sprite.Group()
+	Characters.initCharacter(data)
+	data.leftMinions = Minions.Minions()
+	data.rightMinions = Minions.Minions()
+	data.leftMinions.spawnMinionWave((500, data.mapHeight * 7 / 8), (500, 500),
+									 "left", "top", data)
+	data.rightMinions.spawnMinionWave((data.mapWidth * 7 / 8, 500), (500, 500),
+									  "right", "top", data)
+	data.rightMinions.spawnMinionWave((6500, data.mapHeight * 1 / 10),
+									  (6500, 6500),
+									  "right", "bottom", data)
+	data.leftMinions.spawnMinionWave((data.mapWidth * 1 / 10, 6500), (6500,
+												6500), "left", "bottom", data)
 
-    data.minions.spawnMinionWave(
-        (data.mapWidth * 7 / 8, data.mapHeight * 1 / 10),
-        (3500, 3500), "right", "mid", data)
-    data.minions.spawnMinionWave(
-        (data.mapWidth * 1 / 10, data.mapHeight * 7 / 8),
-        (3500, 3500), "left", "mid", data)
-    data.timer = 0
-    icons.initIcons(data)
-    data.scrollX = data.scrollY = 0
-    data.fireOn = "off"
-    data.mapStep = 50
-    Projectiles.initProjectiles(data)
+	data.rightMinions.spawnMinionWave(
+		(data.mapWidth * 7 / 8, data.mapHeight * 1 / 10), (3500, 3500),
+		"right", "mid", data
+	)
+	data.leftMinions.spawnMinionWave(
+		(data.mapWidth * 1 / 10, data.mapHeight * 7 / 8), (3500, 3500),
+		"left", "mid", data
+	)
+	data.timer = 0
+	icons.initIcons(data)
+	data.scrollX = data.scrollY = 0
+	data.fireOn = "off"
+	data.mapStep = 50
+	Projectiles.initProjectiles(data)
 
 
 def mouseDown(event, data):
@@ -90,28 +94,46 @@ def mouseDown(event, data):
 
 def mouseUp(event, data):
     print(data.players)
+	if(event.button==3):
+		data.player.autoAttack(data,event.pos)
+	if (event.button == 3 and data.fireOn == 'off'):
+		data.player.dest = [event.pos[0] + data.scrollX,
+							event.pos[1] + data.scrollY]
+
+	if (event.button == 3 and data.fireOn == 'on'):
+
+		if data.player.getName() == "Bowser":
+			data.player.fireDest = list(event.pos)
+			if data.player.fireOn == 'off':
+				data.player.ability3()
+		if data.player.getName() == 'Yoshi':
+			data.player.rollDest = list(event.pos)
+			if data.player.roll:
+				data.player.ability3()
+		data.fireOn = "off"
 
 
 def keypress(data):
-    keys = pygame.key.get_pressed()
-    x, y = 0, 0
-    if keys[pygame.K_w] and data.scrollY > -200:
-        y += -1
-    if keys[pygame.K_s] and data.scrollY < data.mapHeight:
-        y += 1
-    if keys[pygame.K_a] and data.scrollX > -200:
-        x += -1
-    if keys[pygame.K_d] and data.scrollX < data.mapWidth:
-        x += 1
-    drawMap.move(data, x, y)
-    data.minions.move(-x, -y, data)
+	keys = pygame.key.get_pressed()
+	x, y = 0, 0
+	if keys[pygame.K_w] and data.scrollY > -200:
+		y += -1
+	if keys[pygame.K_s] and data.scrollY < data.mapHeight:
+		y += 1
+	if keys[pygame.K_a] and data.scrollX > -200:
+		x += -1
+	if keys[pygame.K_d] and data.scrollX < data.mapWidth:
+		x += 1
+	drawMap.move(data, x, y)
+	data.leftMinions.move(-x, -y, data)
+	data.rightMinions.move(-x, -y, data)
 
 
 def keyDown(event, data):
     msg=''
     # print(event.key)
 
-    # print(data.scrollX)
+	# print(data.scrollX)
 
     if (event.unicode == '1'):
         data.player.ability1()
@@ -123,6 +145,8 @@ def keyDown(event, data):
         if data.player.getName() == 'Bowser':
             data.fireOn = 'on'
             msg+='B3\n'
+        elif data.player.getName() == 'Yoshi':
+            data.player.roll = True
         else:
             data.player.ability3()
             msg+='M3\n'
@@ -136,13 +160,10 @@ def keyDown(event, data):
 
 
 def keyUp(event, data):
-    if (event.key == 273):
-        data.downPressed = False
+	pass
 
 
 def timerFired(data):
-    data.timer += 250
-    data.minions.update(data.timer, data)
     
     if (serverMsg.qsize() > 0):
         msg = serverMsg.get(False)
@@ -228,17 +249,22 @@ def timerFired(data):
             print("failed")
             serverMsg.task_done()
 
+	data.timer += 250
+	data.leftMinions.update(data.timer, data)
+	data.rightMinions.update(data.timer, data)
+	pass
 
 
 def redrawAll(display, data):
-    drawMap.drawBoard(data, display)
-    drawMap.drawMap(data, display)
-    Characters.drawCharacter(display, data)
-    data.minions.drawMinions(display)
-    ChainChomp.updateTowers(display,data)
-    Projectiles.drawProjectiles(display,data)
-    UI.drawTaskbar(display, data)
-    icons.drawIcons(display, data)
+	drawMap.drawBoard(data, display)
+	drawMap.drawMap(data, display)
+	Characters.drawCharacter(display, data)
+	data.leftMinions.drawMinions(display)
+	data.rightMinions.drawMinions(display)
+	ChainChomp.updateTowers(display,data)
+	Projectiles.drawProjectiles(display,data)
+	UI.drawTaskbar(display, data)
+	icons.drawIcons(display, data)
 
 
 def run(width=300, height=300,serverMsg=None, server=None):
