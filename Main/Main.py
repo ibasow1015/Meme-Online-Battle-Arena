@@ -9,6 +9,7 @@ import ChainChomp
 
 
 def init(data):
+	data.backGround=drawMap.backGround()
 	data.mapWidth = 7000
 	data.mapHeight = 7000
 	data.unit = data.width / 100
