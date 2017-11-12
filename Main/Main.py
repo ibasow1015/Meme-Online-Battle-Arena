@@ -18,12 +18,22 @@ def init(data):
     data.players = pygame.sprite.Group()
     Characters.initCharacter(data)
     data.minions = Minions.Minions()
-    data.minions.spawnMinionWave((200, 7000 // 3), (200, 200), "left", "top",
-                                 data)
+    data.minions.spawnMinionWave((500, data.mapHeight * 7 / 8), (500, 500),
+                                 "left", "top", data)
+    data.minions.spawnMinionWave((data.mapWidth * 7 / 8, 500), (500, 500),
+                                 "right", "top", data)
+    data.minions.spawnMinionWave((6500, data.mapHeight * 1 / 10), (6500, 6500),
+                                 "right", "bottom", data)
+    data.minions.spawnMinionWave((data.mapWidth * 1 / 10, 6500), (6500, 6500),
+                                 "left", "bottom", data)
+
+    data.minions.spawnMinionWave((data.mapWidth * 7/8, 6500), (3600, 3600),
+                                 "right", "mid", data)
+    data.minions.spawnMinionWave((6500, data.mapHeight * 7/8), (3600, 3600),
+                                 "left", "mid", data)
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
-    data.minionNum = 1
     data.fireOn = "off"
     data.mapStep = 50
 

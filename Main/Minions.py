@@ -1,5 +1,4 @@
 from pygame import *
-import pygame
 import os
 
 
@@ -26,6 +25,9 @@ class Minions(sprite.Group):
             for i in range(5):
                 x = i * 28 * (side == "left")
                 y = i * 28 * (side == "right")
+        if lane == "mid":
+            for i in range(5):
+                x = y = i * 28 * (-1 ** (side == "left"))
                 self.add(Melee((position[0] + x, position[1] + y),
                                destination, side, lane, data))
 
@@ -59,13 +61,22 @@ class Minion(sprite.Sprite):
         pass
 
     def update(self, timer, data):
+
         if not timer % 1000:
-            minY = self.destination[1] - data.scrollY
-            minX = self.destination[1] - data.scrollX
-            if self.rect.x < minX:
-                self.rect.x -= 6
-            if self.rect.y > minY:
-                self.rect.y -= 6
+            if self.lane == "mid":
+                print(self.rect.center)
+            targetX = self.destination[1] - data.scrollY
+            targetY = self.destination[1] - data.scrollX
+            if self.lane != "bottom":
+                if self.rect.x > targetY:
+                    self.rect.x -= 10
+                if self.rect.y > targetX:
+                    self.rect.y -= 10
+            if self.lane != "top":
+                if self.rect.x < targetY:
+                    self.rect.x += 10
+                if self.rect.y < targetX:
+                    self.rect.y += 10
 
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
@@ -86,8 +97,8 @@ class Melee(Minion):
         if lane == "bottom":
             self.direction = "down" if self.side == "right" else "right"
 
-        self.image = image.load(os.path.join('sprites/Koopa/move %s.png' % (
-            self.direction)))
+        self.image = image.load(os.path.join('sprites/Koopa/%s move %s.png' %
+                                             (self.side, self.direction)))
         super(Melee, self).__init__(startingPosition, destination, data)
         self.image = transform.scale(self.image, (self.width, self.height))
         self.health = 350
