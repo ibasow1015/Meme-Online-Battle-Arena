@@ -20,7 +20,6 @@ def init(data):
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
-    data.minionNum = 1
     data.mapStep = 50
     data.towers = pygame.sprite.Group()
     data.mapWidth = 7000
@@ -36,6 +35,7 @@ def init(data):
     icons.initIcons(data)
     data.mapStep = 50
     data.fireOn = 'off'
+
 
 
 def mouseDown(event, data):

@@ -17,30 +17,28 @@ class Player(pygame.sprite.Sprite):
 		self.fireOn = 'off'
 		self.fireState = 0
 
+
+
 	def move(self, data, epsilon=6):
 		# location command
 		destX, destY = self.dest[0], self.dest[1]
-		fdestX, fdestY = self.fireDest[0], self.fireDest[1]
+
 		# current location
 		x, y = self.pos[0], self.pos[1]
-		fx, fy = self.fireRect.center[0], self.fireRect.center[1]
+
 
 		dx = destX - x
 		dy = destY - y
-		fdx = fdestX - fx
-		fdy = fdestY - fy
+
 
 		xDir, yDir = 1, 1
-		fxDir, fyDir = 1,1
+
 
 		if (dx < 0):
 			xDir = -1
 		if (dy < 0):
 			yDir = -1
-		if(fdx<0):
-			fxDir = -1
-		if(fdy<0):
-			fyDir = -1
+
 
 		if (dy < epsilon and dy > -epsilon and dx < epsilon and dx > -epsilon):
 			self.movementState = 'still'
@@ -76,37 +74,9 @@ class Player(pygame.sprite.Sprite):
 		self.rect.center = (x - data.scrollX, y - data.scrollY)
 		self.pos = [x, y]
 
-		if (fdy < epsilon and fdy > -epsilon and fdx < epsilon and fdx >
-			-epsilon):
-			self.fireRect.center = (fx, fy)
-			self.fireOn = 'off'
-		elif (fdy < epsilon and fdy > -epsilon):
-			self.fireRect.center = (fx + self.speed * fxDir, fy)
-			if (fxDir > 0):
-				self.animationDirection = 'right'
-			else:
-				self.animationDirection = 'left'
-		elif (fdx < epsilon and fdx > -epsilon):
-			self.fireRect.center = (fx, fy + self.speed * fyDir)
-			if (fxDir > 0):
-				self.animationDirection = 'right'
-			else:
-				self.animationDirection = 'left'
-		else:
-			# get vector angle
-			theta = abs(math.atan(fdy / fdx))
-			# calculate unit vector
-			i = self.speed * math.cos(theta) * fxDir
-			j = self.speed * math.sin(theta) * fyDir
-			self.fireRect.center = (fx + i, fy + j)
-			self.movementState = 'moving'
-			if (abs(i) > abs(j) or fyDir == 1):
-				if (fxDir > 0):
-					self.animationDirection = 'right'
-				else:
-					self.animationDirection = 'left'
-			else:
-				self.animationDirection = 'up'
+
+
+		#print('bowser', self.rect.center)
 
 	def drawFire(self, display):
 		self.ability3Move()
