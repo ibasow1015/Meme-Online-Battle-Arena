@@ -79,6 +79,8 @@ def keypress(data):
     drawMap.move(data, x, y)
     data.leftMinions.move(-x, -y, data)
     data.rightMinions.move(-x, -y, data)
+    for projectile in data.projectiles:
+        projectile.adjust(-x, -y, data)
 
 
 def keyDown(event, data):

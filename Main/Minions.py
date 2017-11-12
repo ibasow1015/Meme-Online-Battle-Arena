@@ -16,20 +16,20 @@ class Minions(sprite.Group):
 
     def spawnMinionWave(self, position, destination, side, lane, data):
         if lane == "top":
-            for i in range(5):
-                x = i * 28 * (side == "right")
-                y = i * 28 * (side == "left")
+            for i in range(6):
+                x = i * 50 * (side == "right")
+                y = i * 50 * (side == "left")
                 self.add(Melee((position[0] + x, position[1] + y), destination,
                                side, lane, data))
         if lane == "bottom":
-            for i in range(5):
-                x = i * 28 * (side == "left")
-                y = i * 28 * (side == "right")
+            for i in range(6):
+                x = i * 50 * (side == "left")
+                y = i * 50 * (side == "right")
                 self.add(Melee((position[0] + x, position[1] + y), destination,
                                side, lane, data))
         if lane == "mid":
-            for i in range(5):
-                x = y = i * 28
+            for i in range(6):
+                x = y = i * 50
                 x *= -1 if side == "right" else 1
                 y *= -1 if side == "left" else 1
                 self.add(Melee((position[0] + x, position[1] + y),
@@ -41,7 +41,7 @@ class Minions(sprite.Group):
 
 
 class Minion(sprite.Sprite):
-    minions = Minions()
+    minions = None
 
     def __init__(self, startingPosition, destination, data):
         super(Minion, self).__init__()
@@ -53,7 +53,13 @@ class Minion(sprite.Sprite):
         self.width = 30
         self.height = 30
         self.hitbox = 25
-        Minion.minions.add(self)
+        self.auto = False
+        self.state = 1
+        if Minion.minions is not None:
+            Minion.minions.add(self)
+        else:
+            Minion.minions = Minions()
+            Minion.minions.add(self)
 
     def distance(self, other):
         return math.sqrt((self.rect.x - other.rect.x) ** 2 + (self.rect.y -
@@ -62,19 +68,20 @@ class Minion(sprite.Sprite):
         return self.distance(other) <= self.range
 
     def getTarget(self, data):
+        print(len(data.leftMinions.sprites()))
+        print(len(data.rightMinions.sprites()))
         if self.side == "right" and self.target is None:
             for target in data.leftMinions.sprites():
                 if self.inRange(target):
                     self.destination = target.rect.center
                     self.target = target
+                    print(self.destination, self.target)
         elif self.side == "left" and self.target is None:
             for target in data.rightMinions.sprites():
                 if self.inRange(target):
                     self.destination = target.rect.center
                     self.target = target
-
-
-
+                    print(self.destination, self.target)
     def getHealth(self):
         pass
 
@@ -84,31 +91,50 @@ class Minion(sprite.Sprite):
     def getDamage(self):
         pass
 
+    def inBoundaries(self, data):
+        if self.side == "left":
+            for ally in data.leftMinions.sprites():
+                if self.distance(ally) < 4:
+                    return True
+        elif self.side == "right":
+            for ally in data.rightMinions.sprites():
+                if self.distance(ally) < 4:
+                    return True
+        return False
+
     def update(self, timer, data):
         self.getTarget(data)
         if not timer % 1000:
-            targetX = self.destination[1] - data.scrollY
-            targetY = self.destination[1] - data.scrollX
-            if self.target is None or self.distance(self.target) < self.autoRad:
+            if self.target is None:
+                self.image = image.load(
+                    os.path.join('sprites/Koopa/%s move %s.png' %
+                                 (self.side, self.direction)))
+                self.image = transform.scale(self.image, (self.width,
+                                                          self.height))
+                targetX = self.destination[0] - data.scrollX
+                targetY = self.destination[1] - data.scrollY
                 if self.lane == "top":
-                    if self.rect.x > targetY:
+                    if self.rect.x > targetX:
                         self.rect.x -= 10
-                    if self.rect.y > targetX:
+                    if self.rect.y > targetY:
                         self.rect.y -= 10
                 if self.lane == "bottom":
-                    if self.rect.x < targetY:
+                    if self.rect.x < targetX:
                         self.rect.x += 10
-                    if self.rect.y < targetX:
+                    if self.rect.y < targetY:
                         self.rect.y += 10
                 if self.lane == "mid":
-                    if self.rect.x > targetY:
+                    if self.rect.x > targetX:
                         self.rect.x -= 10
-                    if self.rect.y > targetX:
+                    if self.rect.y > targetY:
                         self.rect.y -= 10
-                    if self.rect.x < targetY:
+                    if self.rect.x < targetX:
                         self.rect.x += 10
-                    if self.rect.y < targetX:
+                    if self.rect.y < targetY:
                         self.rect.y += 10
+        if self.target is not None:
+            self.autoAttack()
+
 
     def setCenter(self, x, y, data):
         self.rect.x += x * data.mapStep
@@ -117,7 +143,7 @@ class Minion(sprite.Sprite):
     def getValue(self, cs):
         pass
 
-    def autoAttack(self, direction):
+    def autoAttack(self):
         pass
 
 class Melee(Minion):
@@ -157,5 +183,9 @@ class Melee(Minion):
             return self.lastHit
         return self.assist
 
-   #def autoAttack(self, direction):
-
+    def autoAttack(self):
+        self.state += 1
+        self.state %= 7
+        self.image = image.load(os.path.join('sprites/Koopa/%s attack %d.png'
+                                            % (self.side, self.state)))
+        self.image = transform.scale(self.image, (self.width, self.height))
