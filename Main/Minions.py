@@ -63,8 +63,6 @@ class Minion(sprite.Sprite):
     def update(self, timer, data):
 
         if not timer % 1000:
-            if self.lane == "mid":
-                print(self.rect.center)
             targetX = self.destination[1] - data.scrollY
             targetY = self.destination[1] - data.scrollX
             if self.lane != "bottom":
