@@ -51,6 +51,8 @@ class Mario(Characters.Player):
                 self.maxHealth -= 600
                 self.width -= 75
                 self.height -= 150
+                self.rect.width-=75
+                self.rect.height-=150
                 if (self.health > self.maxHealth):
                     self.health = self.maxHealth
         if (self.ability3Active):
@@ -62,6 +64,8 @@ class Mario(Characters.Player):
                 self.health -= 10
                 self.width -= 25
                 self.height -= 50
+                self.rect.width-=25
+                self.rect.height-=50
 
 
     def ability1(self):
@@ -91,6 +95,8 @@ class Mario(Characters.Player):
             self.health += 10
             self.width += 25
             self.height += 50
+            self.rect.width+=25
+            self.rect.height+=50
 
 
     def ability4(self):
@@ -102,6 +108,8 @@ class Mario(Characters.Player):
             self.health += 600
             self.width += 75
             self.height += 150
+            self.rect.width+=75
+            self.rect.height+=150
 
 
     def getCenter(self):
