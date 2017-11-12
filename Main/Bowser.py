@@ -3,8 +3,9 @@ import pygame
 import os
 
 class Bowser(Characters.Player):
-	def __init__(self, x, y, name):
-		Characters.Player.__init__(self, x, y, name)
+	def __init__(self, data, pos, name):
+		Characters.Player.__init__(self,data, pos, name)
+		x, y = pos
 		self.width=25
 		self.height=50
 		self.image=pygame.image.load(os.path.join('sprites/bowser/bowser_r1.png'))

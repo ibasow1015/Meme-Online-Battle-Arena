@@ -17,22 +17,37 @@ def init(data):
     data.timer = 0
     icons.initIcons(data)
     data.scrollX = data.scrollY = 0
+    data.mapStep = 20
 
 
 def mouseDown(event, data):
     if (event.button == 3):
-        data.player.dest = list(event.pos)
+        data.player.dest = [event.pos[0] + data.scrollX,\
+                            event.pos[1] + data.scrollY]
 
 
 def mouseUp(event, data):
     pass
+
+def keypress(data):
+    keys = pygame.key.get_pressed()
+    x, y = 0, 0
+    if keys[pygame.K_w]:
+        y += -1
+    if keys[pygame.K_s]:
+        y += 1
+    if keys[pygame.K_a]:
+        x += -1
+    if keys[pygame.K_d]:
+        x += 1
+    drawMap.move(data, x, y)
 
 
 def keyDown(event, data):
     # print(event.key)
 
     # print(data.scrollX)
-    if (event.key == 119 and data.scrollY > -200):
+    """if (event.key == 119 and data.scrollY > -200):
         drawMap.move(data, 0, -1)
         data.player.setY(data.mapStep)
         data.player.changeDestination(0, data.mapStep)
@@ -55,7 +70,7 @@ def keyDown(event, data):
         data.player.setX(-data.mapStep)
         data.player.changeDestination(-data.mapStep, 0)
         for minion in data.minions.sprites():
-            minion.setX(-data.mapStep)
+            minion.setX(-data.mapStep)"""
 
     if (event.unicode == '1'):
         data.player.ability1()
@@ -148,6 +163,19 @@ def run(width=300, height=300):
                 mouseDownWrapper(event, display, data)
             if (event.type == MOUSEBUTTONUP):
                 mouseUpWrapper(event, display, data)
+
+        keypress(data)
+        """keys = pygame.key.get_pressed()
+        x, y = 0, 0
+        if keys[pygame.K_w]:
+            y = -1
+        elif keys[pygame.K_s]:
+            y = 1
+        if keys[pygame.K_a]:
+            x = -1
+        elif keys[pygame.K_d]:
+            x = 1"""
+
         timerFiredWrapper(display, data)
 
 

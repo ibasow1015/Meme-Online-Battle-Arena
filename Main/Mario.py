@@ -3,14 +3,14 @@ import pygame
 import os
 
 class Mario(Characters.Player):
-	def __init__(self, x, y, name):
-		Characters.Player.__init__(self, x, y, name)
+	def __init__(self, data, pos, name):
+		Characters.Player.__init__(self, data,pos, name)
 		self.width=25
 		self.height=50
 		self.image=pygame.image.load(os.path.join('sprites/mario_r1.png'))
 		self.image=pygame.transform.scale(self.image,(self.width,self.height))
 		self.rect = self.image.get_rect()
-		self.rect.center = (x, y)
+		self.rect.center = pos
 		self.width=25
 		self.height=50
 
