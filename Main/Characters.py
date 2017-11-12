@@ -5,7 +5,7 @@ import math
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, name):
         pygame.sprite.Sprite.__init__(self)
-        self.dest = (x, y)
+        self.dest = [x, y]
         self.gold = 200
 
     def move(self, epsilon=6):
@@ -38,7 +38,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.center = (x + i, y + j)
 
     def update(self):
-        self.move()
+        self.move(15)
 
     def setX(self, x):
         self.rect.x += x
@@ -46,8 +46,12 @@ class Player(pygame.sprite.Sprite):
     def setY(self, y):
         self.rect.y += y
 
-    def setDestination(self, x, y):
-        self.dest = (x, y)
+    def changeDestination(self, dx, dy):
+        self.dest[0] += dx
+        self.dest[1] += dy
+
+    def getDestination(self):
+        return self.dest
 
 class Test(Player):
     def __init__(self, x, y, name):

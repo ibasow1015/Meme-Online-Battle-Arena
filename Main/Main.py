@@ -21,7 +21,7 @@ def init(data):
 
 def mouseDown(event, data):
     if (event.button == 3):
-        data.player.dest = event.pos
+        data.player.dest = list(event.pos)
 
 
 def mouseUp(event, data):
@@ -29,31 +29,31 @@ def mouseUp(event, data):
 
 
 def keyDown(event, data):
-    print(event.key)
+    # print(event.key)
 
     # print(data.scrollX)
-    if (event.key == 119 and data.scrollX > -200):
+    if (event.key == 119 and data.scrollY > -200):
         drawMap.move(data, 0, -1)
         data.player.setY(data.mapStep)
-        data.player.setDestination(*data.player.getCenter())
+        data.player.changeDestination(0, data.mapStep)
         for minion in data.minions.sprites():
             minion.setY(data.mapStep)
     elif (event.key == 115 and data.scrollY < 7200):
         drawMap.move(data, 0, 1)
         data.player.setY(-data.mapStep)
-        data.player.setDestination(*data.player.getCenter())
+        data.player.changeDestination(0, -data.mapStep)
         for minion in data.minions.sprites():
             minion.setY(-data.mapStep)
     elif (event.key == 97 and data.scrollX > -200):
         drawMap.move(data, -1, 0)
         data.player.setX(data.mapStep)
-        data.player.setDestination(*data.player.getCenter())
+        data.player.changeDestination(data.mapStep, 0)
         for minion in data.minions.sprites():
             minion.setX(data.mapStep)
     elif (event.key == 100 and data.scrollX < 7200):
         drawMap.move(data, 1, 0)
         data.player.setX(-data.mapStep)
-        data.player.setDestination(*data.player.getCenter())
+        data.player.changeDestination(-data.mapStep, 0)
         for minion in data.minions.sprites():
             minion.setX(-data.mapStep)
 
