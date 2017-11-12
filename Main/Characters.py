@@ -83,9 +83,10 @@ class Player(pygame.sprite.Sprite):
         return self.dest
 
 import Mario
+import Bowser
 
 def initCharacter(data):
-    data.player = Mario.Mario(50, 50, 'Player1')
+    data.player = Bowser.Bowser(50, 50, 'Player1')
     data.players.add(data.player)
 
 
