@@ -60,7 +60,6 @@ class Minion(sprite.Sprite):
 
     def update(self, timer, data):
         if not timer % 1000:
-            print("Hi")
             minY = self.destination[1] - data.scrollY
             minX = self.destination[1] - data.scrollX
             if self.rect.x < minX:
