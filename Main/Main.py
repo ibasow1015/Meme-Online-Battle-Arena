@@ -29,22 +29,39 @@ def mouseUp(event, data):
 
 
 def keyDown(event, data):
-    # print(event.key)
+    print(event.key)
 
     # print(data.scrollX)
-    if (event.key == 273):
+    if (event.key == 119):
         drawMap.move(data, 0, -1)
-    elif (event.key == 274):
+        data.player.setY(data.mapStep)
+        data.player.setDestination(*data.player.getCenter())
+        for minion in data.minions.sprites():
+            minion.setY(data.mapStep)
+    elif (event.key == 115):
         drawMap.move(data, 0, 1)
-    elif (event.key == 276):
+        data.player.setY(-data.mapStep)
+        data.player.setDestination(*data.player.getCenter())
+        for minion in data.minions.sprites():
+            minion.setY(-data.mapStep)
+    elif (event.key == 97):
         drawMap.move(data, -1, 0)
-    elif (event.key == 275):
+        data.player.setX(data.mapStep)
+        data.player.setDestination(*data.player.getCenter())
+        for minion in data.minions.sprites():
+            minion.setX(data.mapStep)
+    elif (event.key == 100):
         drawMap.move(data, 1, 0)
+        data.player.setX(-data.mapStep)
+        data.player.setDestination(*data.player.getCenter())
+        for minion in data.minions.sprites():
+            minion.setX(-data.mapStep)
 
-    if(event.unicode=='1'):
-    	data.player.ability1()
-    if(event.unicode=='2'):
-    	data.player.ability2()
+    if (event.unicode == '1'):
+        data.player.ability1()
+    if (event.unicode == '2'):
+        data.player.ability2()
+
 
 def keyUp(event, data):
     pass
@@ -60,9 +77,8 @@ def redrawAll(display, data):
     drawMap.drawMap(data, display)
     Characters.drawCharacter(display, data)
     data.minions.drawMinions(display)
-    UI.drawTaskbar(display,data)
+    UI.drawTaskbar(display, data)
     icons.drawIcons(display, data)
-
 
 
 def run(width=300, height=300):

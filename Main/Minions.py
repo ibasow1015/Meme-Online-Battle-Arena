@@ -38,6 +38,12 @@ class Minion(sprite.Sprite):
             self.rect.x += data.unit
             self.rect.y += data.unit
 
+    def setX(self, x):
+        self.rect.x += x
+
+    def setY(self, y):
+        self.rect.y += y
+
     def getValue(self, cs):
         pass
 
