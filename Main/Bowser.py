@@ -29,7 +29,7 @@ class Bowser(Characters.Player):
         self.fireImage = pygame.image.load(
             os.path.join('sprites/fireBall/fire_1.png'))
         self.fireImage = pygame.transform.scale(self.fireImage, (
-        self.fireWidth, self.fireHeight))
+            self.fireWidth, self.fireHeight))
         self.fireRect = self.fireImage.get_rect()
         self.fireRect.center = (x - 5, y)
 
@@ -96,7 +96,7 @@ class Bowser(Characters.Player):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_1.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 1):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_2.png'))
@@ -143,7 +143,7 @@ class Bowser(Characters.Player):
                 self.fireImage = pygame.transform.scale(self.fireImage, (
                     self.fireWidth, self.fireHeight))
         elif (
-                self.animationDirection == 'right' or self.animationDirection == 'up'):
+                        self.animationDirection == 'right' or self.animationDirection == 'up'):
             if (self.fireState == 0):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_1.png'))
@@ -153,47 +153,47 @@ class Bowser(Characters.Player):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_2.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 8):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_3.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 7):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_4.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 6):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_5.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 5):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_6.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 4):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_7.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 3):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_8.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 2):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_9.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
             if (self.fireState == 1):
                 self.fireImage = pygame.image.load(
                     os.path.join('sprites/fireBall/fire_10.png'))
                 self.fireImage = pygame.transform.scale(self.fireImage, (
-                self.fireWidth, self.fireHeight))
+                    self.fireWidth, self.fireHeight))
 
     def ability4(self):
         pass
@@ -273,7 +273,7 @@ class Bowser(Characters.Player):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_openMouth.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                     self.image = pygame.transform.flip(self.image, True, False)
             elif (self.fireOn == 'on'):
                 self.image = pygame.image.load(os.path.join(
@@ -286,22 +286,22 @@ class Bowser(Characters.Player):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_r2.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                 elif (self.animationState == 1 or self.animationState == 6):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_r3.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                 elif (self.animationState == 2 or self.animationState == 5):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_r4.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                 elif (self.animationState == 3):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_r1.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
         elif (direction == 'left'):
             self.direct = 'left'
 
@@ -314,7 +314,7 @@ class Bowser(Characters.Player):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_openMouth.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
             elif (self.fireOn == 'on'):
                 self.image = pygame.image.load(
                     os.path.join('sprites/bowser/bowser_openMouth.png'))
@@ -325,22 +325,22 @@ class Bowser(Characters.Player):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_l2.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                 elif (self.animationState == 1 or self.animationState == 6):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_l3.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                 elif (self.animationState == 2 or self.animationState == 5):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_l4.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                 elif (self.animationState == 3):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_l1.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
         elif (direction == 'up'):
             if (self.movementState == 'still'):
                 self.image = pygame.image.load(
@@ -353,10 +353,10 @@ class Bowser(Characters.Player):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_uR.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
                 elif (
-                            self.animationState == 1 or self.animationState == 3 or self.animationState == 7):
+                                    self.animationState == 1 or self.animationState == 3 or self.animationState == 7):
                     self.image = pygame.image.load(
                         os.path.join('sprites/bowser/bowser_uL.png'))
                     self.image = pygame.transform.scale(self.image, (
-                    self.width, self.height))
+                        self.width, self.height))
